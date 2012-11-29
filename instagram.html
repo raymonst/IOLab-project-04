@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <title> Image Search Instagram </title>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+   <script type="text/javascript">
+      function get_instagram(tag) {
+         var api_key ="access_token=215516.f2e0088.4d29740528bf40b08b1e976bc41ac66d"
+         var url = "https://api.instagram.com/v1/tags/"
+         var recent_tag = "/media/recent"
+         
+         console.log(url + tag + recent_tag + '?' + api_key);
+         $.getJSON(url + tag + recent_tag + '?' + api_key +'&callback=?',
+               function(json) {
+                  console.log(json);
+                  $(json.data).each(function(index) {
+                     //console.log(this);
+                     var html_str = '<a href="' + this.link + '">' +
+                                       '<img src="' + this.images.standard_resolution.url + '"' +
+                                           //' title="' + this.caption.text + '"' + 
+                                           ' class="label label-info" width = 250px/>' +
+                                    '</a>';
+                     //console.log(html_str);
+                     $('<li style="float:left;list-style-type: none"></li>').html(html_str).appendTo('#instagramImages');
+                  });
+               });
+      }
+
+      $("#srch_btn").live('click',function(){
+            var tag = $("#tag").val();
+            $('#instagramImages').html('');
+            get_instagram(tag);
+            return false;
+      });
+   </script>
+</head>
+<body>
+   <form>
+      <label for="tag">Image Search from Instagram</label>
+      <div>
+         <input type="text" name="tag" id="tag" placeholder="tag">
+         <button id="srch_btn" type="submit">Search</button>
+      </div>
+   </form>
+   <ul id="instagramImages"></ul>
+</body>
+</html>
