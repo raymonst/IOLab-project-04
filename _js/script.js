@@ -109,7 +109,34 @@ var instagram = {
 var tumblr = {
 
     //----------------------------------------------------------------------------------------------------------
-    init : function() {
+    init : function(tag) {
+			// default variables
+			var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
+			var url = "http://api.tumblr.com/v2/tagged?tag="
+			
+			// width of extracted image
+			var image_width = 250
+			//	var image_height = 
+	
+			// cleaning #tumblr
+		    $('#tumblr').html('');
+			$.getJSON(url+ tag+ '&' + api_key+'&callback=?',
+				function(json){
+						$(json).each(function(index) {
+							var response = this.response
+								// only extract photo-contained post
+								for(var i in response){
+										for (var j in response[i].photos  )
+										{
+											$('<li style="float:left;list-style-type: none"></li>').html('<img src='+response[i].photos[j].original_size.url+' class="label label-info" width = '+image_width+'px/>')
+											.appendTo('#tumblr');								
+										}
+								}
+						});
+			});   
+		return false;
+	});
+
     }
 
 }
