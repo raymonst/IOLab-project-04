@@ -15,7 +15,7 @@ var func = {
 	    var count = 0;
 	    $("#content form").on("submit", function() {
 
-		    if ($("#guess-tag").val() == trending_topics[trend_count]) {
+		    if ($("#guess-tag").val() != trending_topics[trend_count]) {
 			    count++;
 		    };
 
