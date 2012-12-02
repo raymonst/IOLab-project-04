@@ -2,37 +2,38 @@ var history_input = [];
 var hint_counter = 1;
 var answer = "rain";
 var life = 5;
-var duplicate_flag =false;
+var duplicate_flag = false;
 
 var func = {
 
     //----------------------------------------------------------------------------------------------------------
     init : function() {
 	    func.form(hint_counter,answer);
+	    func.buttons();
     },
  
 	//----------------------------------------------------------------------------------------------------------
-	validate : function(input, answer){
+	validate : function(input, answer) {
 		console.log(duplicate_flag);
 		//prevent duplicate input
 		for (var i=0;i<history_input.length ; i++){
 			if (input ==history_input[i] && life <5){ 
-				duplicate_flag =true;
+				duplicate_flag = true;
 			}
-			else duplicate_flag= false;
+			else duplicate_flag = false;
 		}	
 		if (duplicate_flag)	{
 			$('#msg').html("<p>You typed the previous answer again. Please type different input.</p>");
 		}
 		else {
-			if (input == answer){
+			if (input == answer) {
 				//load ending screen function
-				msg ="Congratulation!!";
+				msg ="Congratulations!!";
 				func.ending_screen(msg);
 			}
 			else {
 				// still life left
-				if (life >0){
+				if (life > 0) {
 					$('#guess-tag').html('');
 					// try again message
 					$('#msg').html("<span> You've got wrong answer. Please try again.</span>");
@@ -67,9 +68,9 @@ var func = {
 //		    if ($("#guess-tag").val() != trending_topics[trend_count]) {
 //			    count++;
 //		    };
-		  switch(count) {
+		switch(count) {
 		    case 1:
-		    	instagram.get(answer);
+		    	//instagram.get(answer);
 		    	break;
 		    case 2:
 		    	tumblr.get(answer);
@@ -91,7 +92,7 @@ var func = {
     },
 
 	//----------------------------------------------------------------------------------------------------------
-	ending_screen : function(msg){
+	ending_screen : function(msg) {
 		$('#msg').html("<p>"+msg+"</p>");
 		$('#msg').append("<a href='javascript:document.location.reload();'>Retry the Game</a>");
 		$('#life').html('');
@@ -105,8 +106,36 @@ var func = {
 		for (var i=0;i=history_input.length;i++){
 			history_input.pop();
 		}
-	}
+	},
 
+	//----------------------------------------------------------------------------------------------------------
+	buttons : function() {
+
+		// click submit button
+		$("#content form").live("submit", function() {
+			var input =$("#guess-tag").val();
+			console.log(input);
+			func.validate(input, answer);
+			return false;
+		});
+		
+		//--------------------------------------------------------------------------------------------------------------
+		// click "show more hints"
+		$("#hints").live("click", function() {
+			console.log(hint_counter);
+			hint_counter ++;
+			func.form(hint_counter, answer);
+			return false;
+		});
+		
+		//--------------------------------------------------------------------------------------------------------------
+		// click "show answer"
+		$("#answer").live("click", function() {
+			msg ="We're sorry for making you blown up. The answer is "+answer +".";
+			func.ending_screen(msg);
+		});
+	
+	}
 
 }
 
@@ -242,27 +271,3 @@ $(document).ready(function() {
     func.init();
 });
 
-//--------------------------------------------------------------------------------------------------------------
-// click submit button
-$("#content form").live("submit", function() {
-			var input =$("#guess-tag").val();
-			console.log(input);
-			func.validate(input, answer);
-	return false;
- });
-
-//--------------------------------------------------------------------------------------------------------------
-// click "show more hints"
-$("#hints").live("click", function() {
-			console.log(hint_counter);
-			hint_counter ++;
-			func.form(hint_counter, answer);
-	return false;
- });
-
-//--------------------------------------------------------------------------------------------------------------
-// click "show answer"
-$("#answer").live("click", function() {
-			msg ="We're sorry for making you blown up. The answer is "+answer +".";
-			func.ending_screen(msg);
- });
