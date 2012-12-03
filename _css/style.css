@@ -66,12 +66,12 @@ textarea											{}
 }
 #header input[type=text]:focus						{background:#f8e7c3;}
 
-#header .life-0										{background:none;display:block; height:20px; margin:0 0 10px 0; width:128px;}
-#header .life-1										{background:url(../_images/hearts.png) 0 0 no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
-#header .life-2										{background:url(../_images/hearts.png) 0 -20px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
-#header .life-3										{background:url(../_images/hearts.png) 0 -40px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
-#header .life-4										{background:url(../_images/hearts.png) 0 -60px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
-#header .life-5										{background:url(../_images/hearts.png) 0 -80px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
+#header .life-0										{background:none;display:block; height:30px; margin:0 0 10px 0; width:200px;}
+#header .life-1										{background:url(../_images/hearts.png) 0 0 no-repeat; display:block; height:30px; margin:0 0 10px 0; width:200px;}
+#header .life-2										{background:url(../_images/hearts.png) 0 -30px no-repeat; display:block; height:30px; margin:0 0 10px 0; width:200px;}
+#header .life-3										{background:url(../_images/hearts.png) 0 -60px no-repeat; display:block; height:30px; margin:0 0 10px 0; width:200px;}
+#header .life-4										{background:url(../_images/hearts.png) 0 -90px no-repeat; display:block; height:30px; margin:0 0 10px 0; width:200px;}
+#header .life-5										{background:url(../_images/hearts.png) 0 -120px no-repeat; display:block; height:30px; margin:0 0 10px 0; width:200px;}
 
 #help												{border-left:2px dotted #333; display:none; float:left; margin:0; padding:0 0 0 1%; width:39%;}
 
