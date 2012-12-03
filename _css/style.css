@@ -9,11 +9,11 @@ table{border-collapse:collapse;}
 
 /* global */
 
-body 												{}
+body 												{background:url(../_images/bg.png) repeat; color:#eee; font-family:'Ruluko', helvetica, sans-serif; font-size:1em; line-height:1.3; overflow:hidden;}
 a:link,
-a:visited										    {}
+a:visited										    {color:#eec007; text-decoration:none;}
 a:hover,
-a:visited:hover									    {}
+a:visited:hover									    {color:#f2d303; text-decoration:none;}
 
 table td										    {}
 
@@ -27,26 +27,86 @@ h6												    {}
 p												    {}
 span												{}
 hr													{}
+
 label												{}
-input[type=text]									{}
+
+input												{font-family:'Copse', georgia, serif;}
+input[type=text]									{border:0; font-size:1em;}
 input[type=text]:focus								{}
-input[type=submit]									{}
+
+input[type=submit]									{background:#eec007; border:0; color:#000; cursor:pointer; font-size:1em; height:30px !important; padding:0 10px; text-transform:uppercase;}
+input[type=submit]:hover							{background:#f2d303;}
+
 textarea											{}
 
-::selection 										{}
-::-moz-selection 									{}
+::selection 										{background:#f2d303;}
+::-moz-selection 									{background:#f2d303;}
 
 
 
 /* container */
 
-#container											{margin:50px auto; width:960px;}
+#container											{height:100%; margin:0; overflow:hidden; width:100%;}
 
 
 
 /* header */
 
-#header												{}
+#header												{font-family:'Copse', georgia, serif; background:#000; display:block; height:18%; overflow:hidden; padding:1% 1% 0 1%; width:98%;}
+
+#header form										{display:block; float:left; margin:0; width:40%;}
+#header form table									{width:100%;}
+#header form table td								{vertical-align:top;}
+#header input[type=text]							{color:#000; height:20px; padding:5px 8px; 
+													transition: background .5s;
+													-moz-transition: background .5s; /* Firefox 4 */
+													-webkit-transition: background .5s; /* Safari and Chrome */
+													-o-transition: background .5s; /* Opera */
+													width:92%;
+}
+#header input[type=text]:focus						{background:#f8e7c3;}
+
+#header .life-0										{background:none;display:block; height:20px; margin:0 0 10px 0; width:128px;}
+#header .life-1										{background:url(../_images/hearts.png) 0 0 no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
+#header .life-2										{background:url(../_images/hearts.png) 0 -20px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
+#header .life-3										{background:url(../_images/hearts.png) 0 -40px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
+#header .life-4										{background:url(../_images/hearts.png) 0 -60px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
+#header .life-5										{background:url(../_images/hearts.png) 0 -80px no-repeat; display:block; height:20px; margin:0 0 10px 0; width:128px;}
+
+#help												{border-left:2px dotted #333; display:none; float:left; margin:0; padding:0 0 0 1%; width:39%;}
+
+#button												{clear:both; float:none; font-size:.875em; margin:0 0 10px 0; overflow:hidden;}
+
+#history_input										{clear:both; float:none; font-size:.875em; overflow:hidden;}
+#history_input span									{color:#666;}
+
+#button a											{height:20px; padding:7px 0 3px 30px; text-transform:uppercase;}
+
+#hints												{background:url(../_images/hints.png) 0 0 no-repeat; display:block; float:left; margin:0 30px 0 0;}
+#hints:hover										{background-position:0 -30px;}
+
+#answer												{background:url(../_images/answer.png) 0 0 no-repeat; display:block; float:left; margin:0 0 0 0;}
+#answer:hover										{background-position:0 -30px;}
+
+#msg												{display:block; margin:0 0 5px 0;}			
+#life												{display:block; height:10px; width:100px;}
+
+
+
+/* content */
+
+#content											{height:80%;}
+
+#instagram,
+#tumblr												{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; overflow:hidden; width:100%;}
+#twitter											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; color:#99cde1; display:block; font-size:.875em; height:20%; overflow:hidden; width:100%;}
+
+#instagram li,
+#tumblr li											{display:block; float:left; height:100%; overflow:hidden; width:20%;}
+#twitter li											{background:url(../_images/quote.png) 10px 5px no-repeat; display:block; float:left; height:98%; overflow:hidden; padding:1%; width:18%;}
+
+#instagram li img,
+#tumblr li img										{display:block;}
 
 
 
