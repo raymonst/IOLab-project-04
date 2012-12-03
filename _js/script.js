@@ -28,6 +28,8 @@ var func = {
 			if (input == answer) {
 				//load ending screen function
 				msg ="Congratulations! You got the correct answer!";
+				$("#help").show();
+				$("#button").hide();
 				func.ending_screen(msg);
 			} else {
 				// still life left
