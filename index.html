@@ -4,6 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="description" content="description">
 	<meta name="keywords" content="keywords">
+	<link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ruluko' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="_css/style.css" />
 	<script type="text/javascript" src="_js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="_js/script.js"></script>	
@@ -17,23 +19,33 @@
 <div id="container">
 		
 	<!-- HEADER start -->
-	<div id="header"></div>
-		
-	<div id="button"></div>
-	<div id="history_input"></div>
-	<div id="life"></div>
-	<div id="msg"></div>
+	<div id="header">
+		<form>
+			<div id="life" class="life-bar life-5">&nbsp;</div>
+			<table><tr>
+				<td><input type="text" id="guess-tag" name="guess-tag" placeholder="Enter your answer" /></td>
+				<td><input type="submit" value="guess" /></td>
+			</tr></table>			
+		</form>
+		<div id="help">
+			<div id="button">
+				<a href='#' id='hints'>more hints</a>
+				<a href='#' id='answer'>answer</a>
+			</div>
+			<div id="msg"></div>
+			<div id="history_input"></div>
+		</div>
+	</div>	
 	<!-- HEADER end -->
 				
 	<!-- CONTENT start -->
 	<div id="content">		
-		<form>
-			<input type="text" id="guess-tag" name="guess-tag" />
-			<input type="submit" value="guess" />
-		</form>
-		<ul id="instagram"></ul>
-		<ul id="tumblr"></ul>
-		<ul id="twitter"></ul>
+		<ul id="twitter">
+		</ul>
+		<ul id="tumblr">
+		</ul>
+		<ul id="instagram">
+		</ul>							 
 		<div id="answer"></div>
 	</div>
 	<!-- CONTENT end -->

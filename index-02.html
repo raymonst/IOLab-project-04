@@ -4,6 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="description" content="description">
 	<meta name="keywords" content="keywords">
+	<link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Ruluko' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="_css/style.css" />
 	<script type="text/javascript" src="_js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="_js/script.js"></script>	
@@ -17,29 +19,48 @@
 <div id="container">
 		
 	<!-- HEADER start -->
-	<div id="header"></div>
-		
-	<div id="button"></div>
-	<div id="history_input"></div>
-	<div id="life"></div>
-	<div id="msg"></div>
+	<div id="header">
+		<form>
+			<div id="life" class="life-bar life-5">&nbsp;</div>
+			<table><tr>
+				<td><input type="text" id="guess-tag" name="guess-tag" placeholder="Enter your answer" /></td>
+				<td><input type="submit" value="guess" /></td>
+			</tr></table>			
+		</form>
+		<div id="help">
+			<div id="button">
+				<a href='#' id='hints'>more hints</a>
+				<a href='#' id='answer'>answer</a>
+			</div>
+			<div id="msg"></div>
+			<div id="history_input"></div>
+		</div>
+	</div>	
 	<!-- HEADER end -->
 				
 	<!-- CONTENT start -->
 	<div id="content">		
-		<form>
-			<input type="text" id="guess-tag" name="guess-tag" />
-			<input type="submit" value="guess" />
-		</form>
+		<ul id="twitter">
+			<li>Nullam sapien eros, facilisis vel, eleifend non, auctor dapibus, pede. Maecenas adipiscing mollis massa lorem ipsum. Vestibulumlo erat wisi.</li>
+			<li>Pellentesque vel dui sed orci faucibus iaculis. Suspendisse dictum magna id purus tincidunt rutrum. Nulla congue.</li>
+			<li>Suspendisse vestibulum dignissim quam. Integer vel augue. Phasellus nulla purus, interdum ac, venenatis non, varius rutrum, leo.</li>
+			<li>Ut nulla. Vivamus bibendum, nulla ut congue fringilla, lorem ipsum ultricies risus, ut rutrum velit tortor vel purus. In hac habitasse platea.</li>
+			<li>Morbi non erat non ipsum pharetra tempus. Donec orci. Proin in ante. Pellentesque sit amet purus. Cras egestas diam sed ante.</li>
+		</ul>
+		<ul id="tumblr">
+			<li><img src="_images/test-tumblr-01.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-tumblr-02.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-tumblr-03.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-tumblr-04.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-tumblr-05.jpeg" class="label label-info"></li>
+		</ul>
 		<ul id="instagram">
-			<li><img src="_images/test.jpeg" class="label label-info" width="100"></li>
-			<li><img src="_images/test.jpeg" class="label label-info" width="100"></li>
-			<li><img src="_images/test.jpeg" class="label label-info" width="100"></li>
-			<li><img src="_images/test.jpeg" class="label label-info" width="100"></li>
-			<li><img src="_images/test.jpeg" class="label label-info" width="100"></li>
+			<li><img src="_images/test-instagram-01.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-instagram-02.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-instagram-03.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-instagram-04.jpeg" class="label label-info"></li>
+			<li><img src="_images/test-instagram-05.jpeg" class="label label-info"></li>
 		</ul>							 
-		<ul id="tumblr"></ul>
-		<ul id="twitter"></ul>
 		<div id="answer"></div>
 	</div>
 	<!-- CONTENT end -->

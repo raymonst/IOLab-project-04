@@ -14,7 +14,7 @@ var func = {
  
 	//----------------------------------------------------------------------------------------------------------
 	validate : function(input, answer) {
-		console.log(duplicate_flag);
+		//console.log(duplicate_flag);
 		//prevent duplicate input
 		for (var i=0;i<history_input.length ; i++){
 			if (input ==history_input[i] && life <5){ 
@@ -23,29 +23,37 @@ var func = {
 			else duplicate_flag = false;
 		}	
 		if (duplicate_flag)	{
-			$('#msg').html("<p>You typed the previous answer again. Please type different input.</p>");
-		}
-		else {
+			$('#msg').html("You repeated your answer. Please try something different.");
+		} else {
 			if (input == answer) {
 				//load ending screen function
-				msg ="Congratulations!!";
+				msg ="Congratulations! You got the correct answer!";
 				func.ending_screen(msg);
-			}
-			else {
+			} else {
 				// still life left
 				if (life > 0) {
 					$('#guess-tag').html('');
+					
 					// try again message
-					$('#msg').html("<span> You've got wrong answer. Please try again.</span>");
+					$('#msg').html("<span>Oops, wrong answer. Please try again.</span>");
+
 					// decrease life, then show the remained life
 					life --;
-					$('#life').html("<span>You have "+life +"  life left.</span>");
-					// load "more hint" btn & "show answer" btn
-					$('#button').html("<button id='hints'>See more hints</button> <br> <button id='answer'>show answer</button>");
+					//$('#life').html("<span>You have "+life +"  life left.</span>");
+					$('#life').attr("class", ("life-"+life));
+
+					// show "more hint" btn & "show answer" btn
+					$('#help').fadeIn(200).css({"display":"block"});
+/*
+					$('#hints').show().css({"display":"block"});
+					$('#answer').show().css({"display":"block"});
+*/
+
 					// show the history of the input
-					$('#history_input').append("<span> "+input+" </span>");
+					$('#history_input').append("<span>"+input+"</span>&nbsp;&nbsp;&nbsp;");
 					history_input.push(input);
-					console.log(history_input);
+
+					//console.log(history_input);
 					// (optional) how close the input was
 				}
 				else {
@@ -68,9 +76,10 @@ var func = {
 //		    if ($("#guess-tag").val() != trending_topics[trend_count]) {
 //			    count++;
 //		    };
+
 		switch(count) {
 		    case 1:
-		    	//instagram.get(answer);
+		    	instagram.get(answer);
 		    	break;
 		    case 2:
 		    	tumblr.get(answer);
@@ -80,8 +89,8 @@ var func = {
 		    	break;
 		    case 4:
 		    	alert("show answer");
-		    	console.log(trend_count);
-		    	console.log(trending_topics[trend_count]);
+		    	//console.log(trend_count);
+		    	//console.log(trending_topics[trend_count]);
 		    	trend_count++;
 		    	break;
 		    default:
@@ -93,8 +102,8 @@ var func = {
 
 	//----------------------------------------------------------------------------------------------------------
 	ending_screen : function(msg) {
-		$('#msg').html("<p>"+msg+"</p>");
-		$('#msg').append("<a href='javascript:document.location.reload();'>Retry the Game</a>");
+		$('#msg').html(msg);
+		$('#msg').append("<br/><a href='javascript:document.location.reload();'>Play again!</a>");
 		$('#life').html('');
 		$('#history_input').html('');
 		$('#button').html('');
@@ -112,17 +121,18 @@ var func = {
 	buttons : function() {
 
 		// click submit button
-		$("#content form").live("submit", function() {
-			var input =$("#guess-tag").val();
+		$("#header form").on("submit", function() {
+			var input = $("#guess-tag").val();
 			console.log(input);
 			func.validate(input, answer);
+			func.buttons();
 			return false;
 		});
 		
 		//--------------------------------------------------------------------------------------------------------------
 		// click "show more hints"
-		$("#hints").live("click", function() {
-			console.log(hint_counter);
+		$("#hints").on("click", function() {
+			//console.log(hint_counter);
 			hint_counter ++;
 			func.form(hint_counter, answer);
 			return false;
@@ -130,11 +140,85 @@ var func = {
 		
 		//--------------------------------------------------------------------------------------------------------------
 		// click "show answer"
-		$("#answer").live("click", function() {
-			msg ="We're sorry for making you blown up. The answer is "+answer +".";
+		$("#answer").on("click", function() {
+			msg = "The correct answer is &ldquo;" + answer + "&rdquo;";
 			func.ending_screen(msg);
 		});
 	
+	},
+
+	//----------------------------------------------------------------------------------------------------------
+	content_resize : function() {
+
+		$("#container").height($(window).height());
+		
+		var item_width = $("#instagram li").width();
+		var item_height = $("#instagram li").height();
+
+		$("#instagram li img").each(function() {
+			var self = $(this);
+			var ratio = self.width() / self.height();
+			if (item_height > item_width) {
+				self.height(item_height);
+				self.width(self.height() * ratio);
+			} else {
+				self.width(item_width);
+				self.height(self.width() * 1/ratio);
+			}
+/*
+			var margin_top = ($("#instagram li").height() - self.width()) / 2 + "px"; 
+			self.css({"margin-top" : margin_top});
+*/
+		});
+
+		$("#tumblr li img").each(function() {
+			var self = $(this);
+			var ratio = self.width() / self.height();
+			
+			if (item_width < item_height) {
+				if (self.width() < self.height()) {
+					self.width(item_height);
+					self.height(self.width() * 1/ratio);
+				} else {
+					self.height(item_height);
+					self.width(self.height() * ratio);
+				}
+			} else {
+				if (self.width() < self.height()) {
+					self.width(item_width);
+					self.height(self.width() * 1/ratio);
+				} else {
+					self.height(item_height);
+					self.width(self.height() * ratio);
+				}
+			}
+
+/*
+			if (self.height() > self.width()) {
+				var margin_left = (item_width - self.width()) / 2 + "px";
+			    self.height(item_height);
+			    self.width(item_height * ratio);
+			    self.css({"margin-left" : margin_left, "margin-top" : 0});
+			} else if (self.height() < self.width() || self.height() == self.width()) {
+				var margin_top = (item_height - self.height()) / 2 + "px";
+			    self.width(item_width);
+			    self.height(item_width * 1/ratio);
+			    self.css({"margin-top" : margin_top});
+			}
+*/
+		});
+	
+	},
+
+	//----------------------------------------------------------------------------------------------------------
+	image_hover : function() {
+		$("#content li").on("mouseenter", function() {
+			var self = $(this);
+			$("#content li").not(self).css({"opacity":.5});
+		}).on("mouseleave", function() {
+			var self = $(this);
+			$("#content li").css({"opacity":1});
+		});
 	}
 
 }
@@ -196,14 +280,16 @@ var instagram = {
 			    if (count < 5) {
 				    var html_str = '<a href="' + this.link + '">' + '<img src="' + this.images.standard_resolution.url + '"' 
 				    	//+ ' title="' + this.caption.text + '"' 
-				    	+ ' class="label label-info" width="100" />' + '</a>';
+				    	+ ' class="label label-info" />' + '</a>';
 				    //console.log(html_str);
 				    $('<li></li>').html(html_str).appendTo('#instagram');
 			    }
 			    count++;
 			});
-			$("#instagram").show();
+			func.content_resize();
+			func.image_hover();
 		});
+
 
 /*
 		$.ajax({
@@ -253,12 +339,14 @@ var tumblr = {
 				// only extract photo-contained post
 				for (var i in response) {
 					for (var j in response[i].photos) {
-						$('<li></li>').html('<img src='+response[i].photos[j].original_size.url+' class="label label-info" width = '+image_width+'/>')
+						$('<li></li>').html('<img src='+response[i].photos[j].original_size.url+' class="label label-info"' + '/>')
 						.appendTo('#tumblr');								
 					}
 				}
 			});
 		});   
+		func.content_resize();
+		func.image_hover();
 		return false;
 	}
 
@@ -269,5 +357,11 @@ var tumblr = {
 //--------------------------------------------------------------------------------------------------------------
 $(document).ready(function() {
     func.init();
+    func.content_resize();
+	func.image_hover();
+});
+
+$(window).resize(function() {
+    func.content_resize();
 });
 
