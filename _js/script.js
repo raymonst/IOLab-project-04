@@ -111,7 +111,6 @@ var func = {
 			//console.log(input);
 			func.validate(input, answer);
 			func.buttons();
-			func.overlay();
 			return false;
 		});
 		
@@ -214,14 +213,44 @@ var func = {
 		});
 	},
 
+/*
+	//----------------------------------------------------------------------------------------------------------
+	ending_screen : function(msg) {
+		$('#msg').html(msg);
+		$('#msg').append("<a href='javascript:document.location.reload();'>Play again!</a>");
+		$("#life").attr("class","life-0");
+		$('#history_input').html('');
+		$('#button').html('');
+
+		// initiate default variables
+		hint_counter = 1;
+		life =5;
+		duplicate_flag=false;
+		for (var i=0;i=history_input.length;i++){
+			history_input.pop();
+		}
+	},
+*/
+
 	//----------------------------------------------------------------------------------------------------------
 	overlay : function(msg_header, msg_body) {
 
 		$("#overlay h2").html(msg_header);
 		$("#overlay-message").html(msg_body);
+		$("#life").attr("class","life-0");
+		$('#history_input').html('');
+		$('#button').html('');
 
 		// YOUTUBE CODE HERE
 		$("#overlay-video").html("video");
+
+		// initiate default variables
+		hint_counter = 1;
+		life = 5;
+		duplicate_flag = false;
+		for (var i=0;i=history_input.length;i++){
+			history_input.pop();
+		}
 
 	}
 
