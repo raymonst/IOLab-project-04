@@ -29,8 +29,8 @@
 		</form>
 		<div id="help">
 			<div id="button">
-				<a href='#' id='hints'>more hints</a>
-				<a href='#' id='answer'>answer</a>
+				<a href='#' class="overlay-open" id='hints'>more hints</a>
+				<a href='#' class="overlay-open" id='answer'>answer</a>
 			</div>
 			<div id="msg"></div>
 			<div id="history_input"></div>
@@ -71,6 +71,19 @@
 	<!-- FOOTER end -->	
 	
 </div>
+
+<!-- OVERLAY start -->	
+<div id="overlay">
+	<div id="overlay-content">
+		<a id="overlay-close" href="#">close</a>
+		<h2></h2>
+		<div id="overlay-message"></div>
+		<p><a href='javascript:document.location.reload();'>Play again!</a></p>
+		<div id="overlay-video">
+		</div>
+	</div>
+</div>
+<!-- OVERLAY end -->	
 	
 </body>
 </html>

@@ -4,6 +4,7 @@ var answer = "rain";
 var life = 5;
 var duplicate_flag = false;
 
+//--------------------------------------------------------------------------------------------------------------
 var func = {
 
     //----------------------------------------------------------------------------------------------------------
@@ -27,10 +28,12 @@ var func = {
 		} else {
 			if (input == answer) {
 				//load ending screen function
-				msg ="Congratulations! You got the correct answer!";
+				msg_header = "Congratulations!";
+				msg_body = "You got the correct answer!";
 				$("#help").show();
 				$("#button").hide();
-				func.ending_screen(msg);
+				$("#answer").click();
+				func.overlay(msg_header, msg_body);
 			} else {
 				// still life left
 				if (life > 0) {
@@ -46,10 +49,6 @@ var func = {
 
 					// show "more hint" btn & "show answer" btn
 					$('#help').fadeIn(200).css({"display":"block"});
-/*
-					$('#hints').show().css({"display":"block"});
-					$('#answer').show().css({"display":"block"});
-*/
 
 					// show the history of the input
 					$('#history_input').append("<span>"+input+"</span>&nbsp;&nbsp;&nbsp;");
@@ -60,7 +59,7 @@ var func = {
 				}
 				else {
 					msg = "Game Over. Wanna try again?"
-					func.ending_screen(msg);
+					func.overlay(msg);
 				}
 			}
 		}// duplicate check
@@ -80,44 +79,28 @@ var func = {
 //		    };
 
 		switch(count) {
-		    case 1:
-		    	instagram.get(answer);
-		    	break;
-		    case 2:
-		    	tumblr.get(answer);
-		    	break;
-		    case 3:
-		    	alert("show tweets");
-		    	break;
-		    case 4:
-		    	alert("show answer");
-		    	//console.log(trend_count);
-		    	//console.log(trending_topics[trend_count]);
-		    	trend_count++;
-		    	break;
-		    default:
-		    	alert("correct!");
-		    	break;
-		  }
-		  return false;
-    },
-
-	//----------------------------------------------------------------------------------------------------------
-	ending_screen : function(msg) {
-		$('#msg').html(msg);
-		$('#msg').append("<a href='javascript:document.location.reload();'>Play again!</a>");
-		$('#life').html('');
-		$('#history_input').html('');
-		$('#button').html('');
-
-		// initiate default variables
-		hint_counter = 1;
-		life =5;
-		duplicate_flag=false;
-		for (var i=0;i=history_input.length;i++){
-			history_input.pop();
+			case 1:
+				instagram.get(answer);
+				break;
+			case 2:
+				tumblr.get(answer);
+				break;
+			case 3:
+				alert("show tweets");
+				break;
+			case 4:
+				alert("show answer");
+				//console.log(trend_count);
+				//console.log(trending_topics[trend_count]);
+				trend_count++;
+				break;
+			default:
+				alert("correct!");
+				break;
 		}
-	},
+		return false;
+
+    },
 
 	//----------------------------------------------------------------------------------------------------------
 	buttons : function() {
@@ -125,9 +108,10 @@ var func = {
 		// click submit button
 		$("#header form").on("submit", function() {
 			var input = $("#guess-tag").val();
-			console.log(input);
+			//console.log(input);
 			func.validate(input, answer);
 			func.buttons();
+			func.overlay();
 			return false;
 		});
 		
@@ -141,12 +125,19 @@ var func = {
 		});
 		
 		//--------------------------------------------------------------------------------------------------------------
-		// click "show answer"
-		$("#answer").on("click", function() {
-			msg = "<p>The correct answer is: <br/><span>&ldquo;" + answer + "&rdquo;</span></p>";
-			func.ending_screen(msg);
+		$("#header .overlay-open").unbind("click").on("click", function() {
+			$("#overlay").fadeIn();
+			if ($(this).attr("id") == "answer") {
+				var msg_header = "Sorry :(";
+				var msg_body = "<p>The correct answer is: <span>&ldquo;" + answer + "&rdquo;</span></p>";
+			}
+			func.overlay(msg_header, msg_body);
 		});
-	
+
+		$("#overlay-close").unbind("click").on("click", function() {
+			$("#overlay").fadeOut();
+		});
+
 	},
 
 	//----------------------------------------------------------------------------------------------------------
@@ -221,6 +212,17 @@ var func = {
 			var self = $(this);
 			$("#content li").css({"opacity":1});
 		});
+	},
+
+	//----------------------------------------------------------------------------------------------------------
+	overlay : function(msg_header, msg_body) {
+
+		$("#overlay h2").html(msg_header);
+		$("#overlay-message").html(msg_body);
+
+		// YOUTUBE CODE HERE
+		$("#overlay-video").html("video");
+
 	}
 
 }

@@ -26,7 +26,6 @@ opacity: .5;
 <body>
 
 <?php
-
 header('Access-Control-Allow-Origin: *');
 
 $tag=$_GET['tag'];

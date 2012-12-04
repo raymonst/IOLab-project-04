@@ -17,12 +17,12 @@ a:visited:hover									    {color:#f2d303; text-decoration:none;}
 
 table td										    {}
 
-h1												    {}
-h2												    {}
-h3												    {}
-h4												    {}
-h5												    {}
-h6												    {}
+h1												    {font-family:'Copse', georgia, serif;}
+h2												    {font-family:'Copse', georgia, serif; font-size:2em; margin:0 0 10px 0;}
+h3												    {font-family:'Copse', georgia, serif;}
+h4												    {font-family:'Copse', georgia, serif;}
+h5												    {font-family:'Copse', georgia, serif;}
+h6												    {font-family:'Copse', georgia, serif;}
 
 p												    {}
 span												{}
@@ -109,6 +109,15 @@ textarea											{}
 
 #instagram li img,
 #tumblr li img										{display:block;}
+
+
+
+/* overlay */
+
+#overlay											{background:url(../_images/overlay.png) repeat; display:none; height:100%; left:0; overflow:hidden; position:fixed; top:0; width:100%;z-index:2;}
+#overlay-content									{background:#fff; color:#333; height:580px; margin:50px auto; padding:10px; position:relative; width:580px;}
+#overlay-close										{position:absolute; right:10px; top:10px;}
+#overlay-video										{margin:20px 0 0 0;}
 
 
 
