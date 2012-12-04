@@ -11,7 +11,7 @@ table{border-collapse:collapse;}
 
 body 												{background:url(../_images/bg.png) repeat; color:#eee; font-family:'Ruluko', helvetica, sans-serif; font-size:1em; line-height:1.3; overflow:hidden;}
 a:link,
-a:visited										    {color:#eec007; text-decoration:none;}
+a:visited										    {color:#dfb817; text-decoration:none;}
 a:hover,
 a:visited:hover									    {color:#f2d303; text-decoration:none;}
 
@@ -34,7 +34,7 @@ input												{font-family:'Copse', georgia, serif;}
 input[type=text]									{border:0; font-size:1em;}
 input[type=text]:focus								{}
 
-input[type=submit]									{background:#eec007; border:0; color:#000; cursor:pointer; font-size:1em; height:30px !important; padding:0 10px; text-transform:uppercase;}
+input[type=submit]									{background:#dfb817; border:0; color:#000; cursor:pointer; font-size:1em; height:30px !important; padding:0 10px; text-transform:uppercase;}
 input[type=submit]:hover							{background:#f2d303;}
 
 textarea											{}
@@ -75,7 +75,7 @@ textarea											{}
 
 #help												{border-left:2px dotted #333; display:none; float:left; margin:0; padding:0 0 0 1%; width:39%;}
 
-#button												{clear:both; float:none; font-size:.875em; margin:0 0 10px 0; overflow:hidden;}
+#button												{clear:both; float:none; font-size:.875em; letter-spacing:1px; margin:0 0 10px 0; overflow:hidden;}
 
 #history_input										{clear:both; float:none; font-size:.875em; overflow:hidden;}
 #history_input span									{color:#666;}
@@ -89,6 +89,8 @@ textarea											{}
 #answer:hover										{background-position:0 -30px;}
 
 #msg												{display:block; margin:0 0 5px 0;}			
+#msg p												{margin:0 0 10px 0;}			
+#msg span											{font-size:1.75em; letter-spacing:1px;}			
 #life												{display:block; height:10px; width:100px;}
 
 

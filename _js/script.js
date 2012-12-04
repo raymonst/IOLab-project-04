@@ -37,7 +37,7 @@ var func = {
 					$('#guess-tag').html('');
 					
 					// try again message
-					$('#msg').html("<span>Oops, wrong answer. Please try again.</span>");
+					$('#msg').html("Oops, wrong answer. Please try again.");
 
 					// decrease life, then show the remained life
 					life --;
@@ -105,7 +105,7 @@ var func = {
 	//----------------------------------------------------------------------------------------------------------
 	ending_screen : function(msg) {
 		$('#msg').html(msg);
-		$('#msg').append("<br/><a href='javascript:document.location.reload();'>Play again!</a>");
+		$('#msg').append("<a href='javascript:document.location.reload();'>Play again!</a>");
 		$('#life').html('');
 		$('#history_input').html('');
 		$('#button').html('');
@@ -143,7 +143,7 @@ var func = {
 		//--------------------------------------------------------------------------------------------------------------
 		// click "show answer"
 		$("#answer").on("click", function() {
-			msg = "The correct answer is &ldquo;" + answer + "&rdquo;";
+			msg = "<p>The correct answer is: <br/><span>&ldquo;" + answer + "&rdquo;</span></p>";
 			func.ending_screen(msg);
 		});
 	
@@ -272,7 +272,6 @@ var twitter = {
 	    });
 */
 
-
 		return trending_topics_sample;
 		
     },
@@ -381,7 +380,7 @@ var tumblr = {
 		});   
 		func.content_resize();
 		func.image_hover();
-		return false;
+
 	}
 
 }
