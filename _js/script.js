@@ -229,6 +229,26 @@ var func = {
 
 //--------------------------------------------------------------------------------------------------------------
 
+var hottrend = {
+    //----------------------------------------------------------------------------------------------------------
+    get : function() {
+       // using Google Feed API to load Google Hot Trend Feed as JSON with JSONP style
+       var feed_url = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http%3A%2F%2Fwww.google.com%2Ftrends%2Fhottrends%2Fatom%2Fhourly";
+       var trending_topics = new Array();
+	 
+	    $.getJSON(feed_url + '&callback=?', function(json) {
+	       var feed = $(json.responseData.feed.entries[0].content);
+	       $("li span a", feed).each(function(){
+	          // console.log(this.innerHTML);
+	          trending_topics.push(this.innerHTML);
+          });
+          console.log(trending_topics);
+       });
+    }
+}
+
+//--------------------------------------------------------------------------------------------------------------
+
 var twitter = {
 
     //----------------------------------------------------------------------------------------------------------
@@ -255,6 +275,18 @@ var twitter = {
 
 		return trending_topics_sample;
 		
+    },
+
+    //----------------------------------------------------------------------------------------------------------
+    search : function(term) {
+       var search_url = "http://search.twitter.com/search.json?q=";
+       var tweets = new Array();
+       $.getJSON(search_url + term + '&callback=?', function(json) {
+	       $.each(json.results, function(){
+	         tweets.push(this.text);
+	       });
+	       console.log(tweets);
+       });
     }
 
 }
@@ -361,6 +393,8 @@ $(document).ready(function() {
     func.init();
     func.content_resize();
 	func.image_hover();
+	hottrend.get();
+	twitter.search("lunar eclipse");
 });
 
 $(window).resize(function() {
