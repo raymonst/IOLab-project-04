@@ -84,9 +84,11 @@ var func = {
 				break;
 			case 2:
 				tumblr.get(answer);
+				$("#instagram").animate({top:"40%"});
 				break;
 			case 3:
-				alert("show tweets");
+				$("#tumblr").animate({top:"20%"});
+				$("#instagram").animate({top:"60%"});
 				break;
 			case 4:
 				alert("show answer");
