@@ -15,7 +15,6 @@ var func = {
  
 	//----------------------------------------------------------------------------------------------------------
 	validate : function(input, answer) {
-		//console.log(duplicate_flag);
 		//prevent duplicate input
 		for (var i=0;i<history_input.length ; i++){
 			if (input ==history_input[i] && life <5){ 
@@ -24,6 +23,7 @@ var func = {
 			else duplicate_flag = false;
 		}	
 		if (duplicate_flag)	{
+			console.log(duplicate_flag);
 			$('#msg').html("You repeated your answer. Please try something different.");
 		} else {
 			if (input == answer) {
@@ -36,15 +36,13 @@ var func = {
 				func.overlay(msg_header, msg_body);
 			} else {
 				// still life left
-				if (life > 0) {
+				if (life > 1) {
 					$('#guess-tag').html('');
-					
 					// try again message
 					$('#msg').html("Oops, wrong answer. Please try again.");
 
 					// decrease life, then show the remained life
 					life --;
-					//$('#life').html("<span>You have "+life +"  life left.</span>");
 					$('#life').attr("class", ("life-"+life));
 
 					// show "more hint" btn & "show answer" btn
@@ -53,13 +51,14 @@ var func = {
 					// show the history of the input
 					$('#history_input').append("<span>"+input+"</span>&nbsp;&nbsp;&nbsp;");
 					history_input.push(input);
-
-					//console.log(history_input);
+					console.log("after life : " +life);
 					// (optional) how close the input was
 				}
-				else {
-					msg = "Game Over. Wanna try again?"
-					func.overlay(msg);
+				else if(life == 1){
+  				    $("#answer").click();
+					var msg_header = "Game Over. Wanna try again?";
+					var msg_body = "<p>The correct answer is: <span>&ldquo;" + answer + "&rdquo;</span></p>";
+					func.overlay(msg_header, msg_body);
 				}
 			}
 		}// duplicate check
@@ -110,7 +109,7 @@ var func = {
 			var input = $("#guess-tag").val();
 			//console.log(input);
 			func.validate(input, answer);
-			func.buttons();
+//			func.buttons();
 			return false;
 		});
 		
@@ -234,7 +233,7 @@ var func = {
 
 	//----------------------------------------------------------------------------------------------------------
 	overlay : function(msg_header, msg_body) {
-
+	
 		$("#overlay h2").html(msg_header);
 		$("#overlay-message").html(msg_body);
 		$("#life").attr("class","life-0");
