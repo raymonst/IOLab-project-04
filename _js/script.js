@@ -1,6 +1,6 @@
 var history_input = [];
 var hint_counter = 1;
-var answer = "rain";
+var answer = "lunar eclipse";
 var life = 5;
 var duplicate_flag = false;
 
@@ -311,7 +311,8 @@ var twitter = {
     search : function(term) {
        var search_url = "http://search.twitter.com/search.json?q=";
        var tweets = new Array();
-       $.getJSON(search_url + term + '&callback=?', function(json) {
+       console.log(search_url + term.replace(/\s+/g, '') + '&callback=?');
+       $.getJSON(search_url + term.replace(/\s+/g, '') + '&callback=?', function(json) {
 	       $.each(json.results, function(){
 	         tweets.push(this.text);
 	       });
@@ -335,8 +336,8 @@ var instagram = {
 	    var main_url = "https://api.instagram.com/v1/tags/";
 	    var recent_tag = "/media/recent";
 
-	    // console.log(main_url + tag + recent_tag + '?' + api_key);
-	    $.getJSON(main_url + tag + recent_tag + '?' + api_key + '&callback=?', function(json) {	
+	    console.log(main_url + tag.replace(/\s+/g, '') + recent_tag + '?' + api_key + '&callback=?');
+	    $.getJSON(main_url + tag.replace(/\s+/g, '') + recent_tag + '?' + api_key + '&callback=?', function(json) {	
 		    //console.log(json);
 		    var count = 0;
 		    $(json.data).each(function(index) {
@@ -397,7 +398,8 @@ var tumblr = {
 	
 		// cleaning #tumblr
 		$('#tumblr').html('');
-		$.getJSON(url+ tag+ '&' + api_key+'&callback=?', function(json) {
+		console.log(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?');
+		$.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
 			$(json).each(function(index) {
 				var response = this.response
 				// only extract photo-contained post
