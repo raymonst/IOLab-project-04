@@ -57,7 +57,7 @@ textarea											{}
 #header form										{display:block; float:left; margin:0; width:40%;}
 #header form table									{width:100%;}
 #header form table td								{vertical-align:top;}
-#header input[type=text]							{color:#000; height:20px; padding:5px 8px; 
+#header input[type=text]							{color:#000; height:20px; padding:5px 8px; margin:0 0 10px 0; 
 													transition: background .5s;
 													-moz-transition: background .5s; /* Firefox 4 */
 													-webkit-transition: background .5s; /* Safari and Chrome */
@@ -97,11 +97,11 @@ textarea											{}
 
 /* content */
 
-#content											{height:80%;}
+#content											{height:80%; position:relative;}
 
-#instagram,
-#tumblr												{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; overflow:hidden; width:100%;}
-#twitter											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; color:#99cde1; display:block; font-size:.875em; height:20%; overflow:hidden; width:100%;}
+#instagram											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
+#tumblr												{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
+#twitter											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; color:#99cde1; display:block; font-size:.875em; height:20%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
 
 #instagram li,
 #tumblr li											{display:block; float:left; height:100%; overflow:hidden; width:20%;}
