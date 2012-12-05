@@ -1,16 +1,16 @@
 var history_input = [];
 var hint_counter = 1;
-var answer = "lunar eclipse";
+var answer = "";
 var life = 5;
 var duplicate_flag = false;
+var trending_topics = new Array();
 
 //--------------------------------------------------------------------------------------------------------------
 var func = {
 
     //----------------------------------------------------------------------------------------------------------
     init : function() {
-	    func.form(hint_counter,answer);
-	    func.buttons();
+	    hottrend.get();
     },
  
 	//----------------------------------------------------------------------------------------------------------
@@ -78,6 +78,7 @@ var func = {
 //			    count++;
 //		    };
 
+      console.log("in form: ", answer, count)
 		switch(count) {
 			case 1:
 				instagram.get(answer);
@@ -86,7 +87,7 @@ var func = {
 				tumblr.get(answer);
 				break;
 			case 3:
-				alert("show tweets");
+			   twitter.search(answer);
 				break;
 			case 4:
 				alert("show answer");
@@ -110,7 +111,7 @@ var func = {
 			var input = $("#guess-tag").val();
 			//console.log(input);
 			func.validate(input, answer);
-			func.buttons();
+			//func.buttons();
 			return false;
 		});
 		
@@ -265,7 +266,6 @@ var hottrend = {
     get : function() {
        // using Google Feed API to load Google Hot Trend Feed as JSON with JSONP style
        var feed_url = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http%3A%2F%2Fwww.google.com%2Ftrends%2Fhottrends%2Fatom%2Fhourly";
-       var trending_topics = new Array();
 	 
 	    $.getJSON(feed_url + '&callback=?', function(json) {
 	       var feed = $(json.responseData.feed.entries[0].content);
@@ -274,6 +274,12 @@ var hottrend = {
 	          trending_topics.push(this.innerHTML);
           });
           console.log(trending_topics);
+	       var random_num = (Math.floor((Math.random()*100)+1)) % 20;
+	       answer = trending_topics[random_num];
+	       console.log(random_num, answer);
+
+	       func.form(hint_counter,answer);
+	       func.buttons();
        });
     }
 }
@@ -315,6 +321,8 @@ var twitter = {
        $.getJSON(search_url + term.replace(/\s+/g, '') + '&callback=?', function(json) {
 	       $.each(json.results, function(){
 	         tweets.push(this.text);
+	         $('<li></li>').html(this.text).appendTo('#twitter');
+	         
 	       });
 	       console.log(tweets);
        });
@@ -425,8 +433,7 @@ $(document).ready(function() {
     func.init();
     func.content_resize();
 	func.image_hover();
-	hottrend.get();
-	twitter.search("lunar eclipse");
+	//twitter.search("lunar eclipse");
 });
 
 $(window).resize(function() {
