@@ -28,10 +28,19 @@ var func = {
 			console.log(duplicate_flag);
 			$('#msg').html("You repeated your answer. Please try something different.");
 		} else {
-			if (input == answer) {
+			//removing punctuations, spaces and changing to lower case
+
+				var temp_input = ((input.replace(/[-.,()&$#!\[\]\/{}"']+/g, "")).replace(/\s+/g, "")).toLowerCase();
+
+				var temp_answer = ((answer.replace(/[-.,()&$#!\[\]\/{}"']+/g, "")).replace(/\s+/g, "")).toLowerCase();
+
+
+			if (temp_input == temp_answer) {
 				//load ending screen function
-				msg_header = "Congratulations!";
-				msg_body = "<p>You won! </p><p></p>You deserve a break.";
+				
+
+				var msg_header = "Congratulations!";
+				var msg_body = "<p>You won!</p><p>You deserve a break.</p>";
 
 				$("#help").show();
 				$("#button").hide();
@@ -58,7 +67,7 @@ var func = {
 				else if(life == 1){
   				    $("#answer").click();
 					var msg_header = "Life is Hard!";
-					var msg_body = "You Lose. <p></p>The correct answer is <strong>"+answer+" .</strong> <p></p><p></p>No worries.";
+					var msg_body = "<p>You lost. The correct answer is <strong>"+answer+".</strong>. No worries.</p>";
 					func.overlay(msg_header, msg_body);
 				}
 			}
@@ -74,21 +83,41 @@ var func = {
 				break;
 			case 2:
 				tumblr.get(answer);
-				$("#instagram").show().animate({top:"40%"});
+				setTimeout(function() {
+					$("#instagram").show().animate({top:"40%"});
+					func.content_resize();
+					func.image_hover();
+					setTimeout(function() {
+						$("#tumblr img").each(function(i) {
+						    var self = $(this);
+						    setTimeout(function() {
+						        self.fadeIn(100);
+						    }, 100 * i);
+						})
+					}, 400);
+				}, 500);
 				break;
 			case 3:
-			   twitter.search(answer);
-				$("#tumblr").show().animate({top:"20%"});
-				$("#instagram").show().animate({top:"60%"});
+			 	twitter.search(answer);
+				setTimeout(function() {
+					$("#tumblr").show().animate({top:"20%"});
+					$("#instagram").show().animate({top:"60%"});
+					func.content_resize();
+					func.image_hover();
+					setTimeout(function() {
+						$("#twitter p").each(function(i) {
+						    var self = $(this);
+						    setTimeout(function() {
+						        self.fadeIn(100);
+						    }, 100 * i);
+						})
+					}, 400);
+				}, 500);
 				break;
 			case 4:
-				alert("show answer");
-				//console.log(trend_count);
-				//console.log(trending_topics[trend_count]);
 				trend_count++;
 				break;
 			default:
-				alert("correct!");
 				break;
 		}
 		return false;
@@ -121,7 +150,7 @@ var func = {
 			$("#overlay").fadeIn();
 			if ($(this).attr("id") == "answer") {
 				var msg_header = "Gave up?";
-				var msg_body = "<p>The correct answer is <strong>"+answer+".</strong> <p></p><p></p>Refresh yourself before you try again.";
+				var msg_body = "<p>The correct answer is <strong>"+answer+".</strong> Refresh yourself before you try again.";
 			}
 			func.overlay(msg_header, msg_body);
 		});
@@ -375,7 +404,7 @@ var twitter = {
 	       $.each(json.results, function(){
 	         var term_nospace = term.replace(/\s+/g, '');
 	         var re = new RegExp(term_nospace, "g");
-	         var new_text = this.text.replace(re, "<span>" + term_nospace + "</span>")
+	         var new_text = "<p>" + this.text.replace(re, "<span>" + term_nospace + "</span>") + "</p>"
 	         tweets.push(new_text);
 	         $('<li></li>').html(new_text).appendTo('#twitter');
 	       });
@@ -462,7 +491,7 @@ var tumblr = {
 
 		// cleaning #tumblr
 		$('#tumblr').html('');
-		console.log(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?');
+		//console.log(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?');
 		$.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
 		   var photo_count = 0;
 			$(json).each(function(index) {
@@ -481,9 +510,6 @@ var tumblr = {
 				}
 			});
 		});   
-		func.content_resize();
-		func.image_hover();
-
 	}
 
 }
