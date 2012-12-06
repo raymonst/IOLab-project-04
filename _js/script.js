@@ -58,7 +58,7 @@ var func = {
 				else if(life == 1){
   				    $("#answer").click();
 					var msg_header = "Life is Hard!";
-					var msg_body = "You Lose. <p></p>The correct answer is <strong>"+answer+" .</strong> <p></p><p></p>No worries.";
+					var msg_body = "<p>You lost. The correct answer is <strong>"+answer+".</strong>. No worries.</p>";
 					func.overlay(msg_header, msg_body);
 				}
 			}
@@ -121,7 +121,7 @@ var func = {
 			$("#overlay").fadeIn();
 			if ($(this).attr("id") == "answer") {
 				var msg_header = "Gave up?";
-				var msg_body = "<p>The correct answer is <strong>"+answer+".</strong> <p></p><p></p>Refresh yourself before you try again.";
+				var msg_body = "<p>The correct answer is <strong>"+answer+".</strong> Refresh yourself before you try again.";
 			}
 			func.overlay(msg_header, msg_body);
 		});
