@@ -101,17 +101,21 @@ iframe												{border:0;}
 
 #content											{height:80%; position:relative;}
 
-#instagram											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
-#tumblr												{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
-#twitter											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; color:#99cde1; display:block; font-size:.875em; height:20%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
+#instagram											{border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
+#tumblr												{border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
+#twitter											{border-top:5px solid #000; clear:both; color:#99cde1; display:block; font-size:.875em; height:20%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
+.bg-gradient										{background:url(../_images/bg-item.png) repeat-x;}
+
+
 #twitter span										{background:#99CDE1;}
 
 #instagram li,
 #tumblr li											{display:block; float:left; height:100%; overflow:hidden; width:20%;}
 #twitter li											{background:url(../_images/quote.png) 10px 5px no-repeat; display:block; float:left; height:98%; overflow:hidden; padding:1%; width:18%;}
 
-#tumblr li img										{display:none;}
-#twitter li p										{display:none;}
+#tumblr li img,
+#instagram li img									{display:none;}
+#twitter li 										{display:none;}
 
 
 
