@@ -9,9 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="_css/style.css" />
 	<script type="text/javascript" src="_js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="_js/script.js"></script>	
-<!--	<script type="text/javascript" src="_js/validation.js"></script>
--->
-	<title>TITLE</title>
+	<title>VizWords</title>
 </head>
 
 <body>
@@ -60,12 +58,13 @@
 <!-- OVERLAY start -->	
 <div id="overlay">
 	<div id="overlay-content">
-		<a id="overlay-close" href="#">close</a>
+		<a class="overlay-close" id="overlay-close-x" href="#">close</a>
 		<h2></h2>
 		<div id="end-message"></div>
-		<p><a href='javascript:document.location.reload();'>Play again!</a></p>
 		<div id="overlay-video">
 		</div>
+		<a href="javascript:document.location.reload();">Play again!</a>
+		<a class="overlay-close" href="#">Close</a>
 	</div>
 </div>
 <!-- OVERLAY end -->	

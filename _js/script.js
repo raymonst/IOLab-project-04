@@ -54,8 +54,6 @@ var func = {
 					// show the history of the input
 					$('#history_input').append("<span>"+input+"</span>&nbsp;&nbsp;&nbsp;");
 					history_input.push(input);
-					console.log("after life : " +life);
-					// (optional) how close the input was
 				}
 				else if(life == 1){
   				    $("#answer").click();
@@ -70,17 +68,6 @@ var func = {
     //----------------------------------------------------------------------------------------------------------
     form : function(count, answer) {
 
-//	    trending_topics = twitter.get();
-//	    var trend_count = 0;
-//
-//	    var count = 0;
-//	    $("#content form").on("submit", function() {
-//
-//		    if ($("#guess-tag").val() != trending_topics[trend_count]) {
-//			    count++;
-//		    };
-
-      console.log("in form: ", answer, count)
 		switch(count) {
 			case 1:
 				instagram.get(answer);
@@ -133,14 +120,13 @@ var func = {
 		$("#header .overlay-open").unbind("click").on("click", function() {
 			$("#overlay").fadeIn();
 			if ($(this).attr("id") == "answer") {
-				var msg_header = "Give up?";
-				
+				var msg_header = "Gave up?";
 				var msg_body = "<p>The correct answer is <strong>"+answer+".</strong> <p></p><p></p>Refresh yourself before you try again.";
 			}
 			func.overlay(msg_header, msg_body);
 		});
 
-		$("#overlay-close").unbind("click").on("click", function() {
+		$("#overlay .overlay-close").unbind("click").on("click", function() {
 			$("#overlay").fadeOut();
 		});
 
@@ -243,7 +229,7 @@ var func = {
 	overlay : function(msg_header, msg_body) {
 
 	$("#overlay h2").html(msg_header);
-	$("#overlay-message").html(msg_body);
+	$("#end-message").html(msg_body);
 	$("#life").attr("class","life-0");
 	$('#history_input').html('');
 	$('#button').html('');
@@ -303,7 +289,7 @@ var hottrend = {
 				data:{tag:answer},
 				type: 'GET',  //Need to keep it POST data so that we can send out a longer string
 				success: function(WholeURL) { //From php, the whole file should be returned as CSV string
-					videoText = " Enjoy this popular YouTube video on <strong>"+answer+".</strong></p><iframe src="+WholeURL+" width='520' height='300'></iframe>";
+					videoText = "<iframe src="+WholeURL+" width='520' height='300'></iframe>";
 					//console.log(WholeURL);
 				}
 			});
@@ -373,17 +359,18 @@ var instagram = {
 	    var main_url = "https://api.instagram.com/v1/tags/";
 	    var recent_tag = "/media/recent";
 
-	    console.log(main_url + tag.replace(/\s+/g, '') + recent_tag + '?' + api_key + '&callback=?');
+	    //console.log(main_url + tag.replace(/\s+/g, '') + recent_tag + '?' + api_key + '&callback=?');
 	    $.getJSON(main_url + tag.replace(/\s+/g, '') + recent_tag + '?' + api_key + '&callback=?', function(json) {	
 		    //console.log(json);
 		    var count = 0;
 		    $(json.data).each(function(index) {
 			    //console.log(this);
 			    if (count < 5) {
+/*
 				    var html_str = '<a href="' + this.link + '">' + '<img src="' + this.images.standard_resolution.url + '"' 
-				    	//+ ' title="' + this.caption.text + '"' 
 				    	+ ' class="label label-info" />' + '</a>';
-				    //console.log(html_str);
+*/
+				    var html_str = '<img src="' + this.images.standard_resolution.url + '"' + '" />';
 				    $('<li></li>').html(html_str).appendTo('#instagram');
 			    }
 			    count++;
