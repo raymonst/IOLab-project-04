@@ -349,9 +349,11 @@ var twitter = {
        console.log(search_url + term.replace(/\s+/g, '') + '&callback=?');
        $.getJSON(search_url + term.replace(/\s+/g, '') + '&callback=?', function(json) {
 	       $.each(json.results, function(){
-	         tweets.push(this.text);
-	         $('<li></li>').html(this.text).appendTo('#twitter');
-
+	         var term_nospace = term.replace(/\s+/g, '');
+	         var re = new RegExp(term_nospace, "g");
+	         var new_text = this.text.replace(re, "<span>" + term_nospace + "</span>")
+	         tweets.push(new_text);
+	         $('<li></li>').html(new_text).appendTo('#twitter');
 	       });
 	       console.log(tweets);
        });
