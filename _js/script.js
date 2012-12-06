@@ -403,8 +403,9 @@ var twitter = {
        $.getJSON(search_url + term.replace(/\s+/g, '') + '&callback=?', function(json) {
 	       $.each(json.results, function(){
 	         var term_nospace = term.replace(/\s+/g, '');
-	         var re = new RegExp(term_nospace, "g");
-	         var new_text = "<p>" + this.text.replace(re, "<span>" + term_nospace + "</span>") + "</p>"
+	         var re = new RegExp(term, "gi");
+	         var re_nospace = new RegExp(term_nospace, "gi");
+	         var new_text = "<p>" + this.text.replace(re_nospace, "<span>" + term_nospace + "</span>").replace(re, "<span>" + term + "</span>") + "</p>"
 	         tweets.push(new_text);
 	         $('<li></li>').html(new_text).appendTo('#twitter');
 	       });
