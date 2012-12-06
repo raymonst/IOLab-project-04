@@ -37,11 +37,8 @@ var func = {
 
 			if (temp_input == temp_answer) {
 				//load ending screen function
-
-
 				var msg_header = "Congratulations!";
-				var msg_body = "<p>You won! You guessed "+answer+" correctly.</p><p>You deserve a break.</p>";
-				var msg_body = "<p>You lost. The correct answer is <strong>"+answer+".</strong>. No worries.</p>";
+				var msg_body = "<p>You won! You guessed "+answer+" correctly. You deserve a break.</p>";
 
 				$("#help").show();
 				$("#button").hide();
@@ -68,7 +65,7 @@ var func = {
 				else if(life == 1){
   				    $("#answer").click();
 					var msg_header = "Life is Hard!";
-					var msg_body = "<p>You lost. The correct answer is <strong>"+answer+".</strong>. No worries.</p>";
+					var msg_body = "<p>You lost. The correct answer is <strong>"+answer+".</strong> No worries!</p>";
 					func.overlay(msg_header, msg_body);
 				}
 			}
@@ -81,25 +78,23 @@ var func = {
 		switch(count) {
 			case 1:
 				instagram.get(answer);
+				$("#instagram").show();
+				func.content_resize();
+				func.image_hover();
 				setTimeout(function() {
-					$("#instagram").show();
-					func.content_resize();
-					func.image_hover();
-					setTimeout(function() {
-						$("#instagram img").each(function(i) {
-						    var self = $(this);
-						    setTimeout(function() {
-						        self.fadeIn(100);
-						    }, 100 * i);
-						})
-					}, 400);
-				}, 500);
+				    $("#instagram img").each(function(i) {
+				        var self = $(this);
+				        setTimeout(function() {
+				            self.fadeIn(100);
+				        }, 100 * i);
+				    })
+				}, 400);
 				break;
 			case 2:
 				$("#tumblr").addClass("bg-gradient");
+				$("#instagram").show().animate({top:"40%"});
 				tumblr.get(answer);
 				setTimeout(function() {
-					$("#instagram").show().animate({top:"40%"});
 					func.content_resize();
 					func.image_hover();
 					setTimeout(function() {
@@ -113,11 +108,11 @@ var func = {
 				}, 500);
 				break;
 			case 3:
-			 	twitter.search(answer);
-				setTimeout(function() {
 					$("#twitter").addClass("bg-gradient").show();
 					$("#tumblr").show().animate({top:"20%"});
 					$("#instagram").show().animate({top:"60%"});
+			 	twitter.search(answer);
+				setTimeout(function() {
 					func.content_resize();
 					func.image_hover();
 					setTimeout(function() {
@@ -313,7 +308,7 @@ var func = {
       var main_url = "https://api.instagram.com/v1/tags/";
       var recent_tag = "/media/recent";
       $.getJSON(main_url + tag.replace(/\s+/g, '').replace(/'/g, '') + recent_tag + '?' + api_key + '&callback=?', function(json) {
-         if ($(json.data).length >= 5) {
+         if ($(json.data).length >= 2) {
             console.log("instagram checked.")
             // tumblr check
             var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
