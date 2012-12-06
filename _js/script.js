@@ -30,8 +30,8 @@ var func = {
 		} else {
 			if (input == answer) {
 				//load ending screen function
-				msg_header = "Congratulations!";
-				msg_body = "<p>You won! </p><p></p>You deserve a break.";
+				var msg_header = "Congratulations!";
+				var msg_body = "<p>You won!</p><p>You deserve a break.</p>";
 
 				$("#help").show();
 				$("#button").hide();
@@ -74,21 +74,25 @@ var func = {
 				break;
 			case 2:
 				tumblr.get(answer);
-				$("#instagram").show().animate({top:"40%"});
+				setTimeout(function() {
+					$("#instagram").show().animate({top:"40%"});
+					func.content_resize();
+					func.image_hover();
+				}, 750);
 				break;
 			case 3:
-			   twitter.search(answer);
-				$("#tumblr").show().animate({top:"20%"});
-				$("#instagram").show().animate({top:"60%"});
+			 	twitter.search(answer);
+				setTimeout(function() {
+					$("#tumblr").show().animate({top:"20%"});
+					$("#instagram").show().animate({top:"60%"});
+					func.content_resize();
+					func.image_hover();
+				}, 750);
 				break;
 			case 4:
-				alert("show answer");
-				//console.log(trend_count);
-				//console.log(trending_topics[trend_count]);
 				trend_count++;
 				break;
 			default:
-				alert("correct!");
 				break;
 		}
 		return false;
@@ -437,9 +441,6 @@ var tumblr = {
 				}
 			});
 		});   
-		func.content_resize();
-		func.image_hover();
-
 	}
 
 }

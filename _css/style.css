@@ -104,6 +104,7 @@ iframe												{border:0;}
 #instagram											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
 #tumblr												{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; display:block; height:40%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
 #twitter											{background:url(../_images/bg-item.png) repeat-x; border-top:5px solid #000; clear:both; color:#99cde1; display:block; font-size:.875em; height:20%; left:0; overflow:hidden; position:absolute; top:0; width:100%;}
+#twitter span										{background:#99CDE1;}
 
 #instagram li,
 #tumblr li											{display:block; float:left; height:100%; overflow:hidden; width:20%;}
@@ -117,7 +118,7 @@ iframe												{border:0;}
 /* overlay */
 
 #overlay											{background:url(../_images/overlay.png) repeat; display:none; height:100%; left:0; overflow:hidden; position:fixed; top:0; width:100%;z-index:2;}
-#overlay-content									{background:#fff; color:#333; height:580px; margin:50px auto; padding:10px; position:relative; width:580px;}
+#overlay-content									{background:#fff; color:#333; height:530px; margin:50px auto; padding:10px; position:relative; width:580px;}
 #overlay-content a:link,
 #overlay-content a:visited							{background:#dfb817; border:0; color:#000; cursor:pointer; display:inline-block; font-size:1em; font-family:'Copse', georgia, serif; height:30px !important; margin:0 10px 0 0; padding:7px 10px 0 10px; text-transform:uppercase;}
 #overlay-content a:hover,
