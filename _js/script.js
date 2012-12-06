@@ -40,7 +40,8 @@ var func = {
 				
 
 				var msg_header = "Congratulations!";
-				var msg_body = "<p>You won!</p><p>You deserve a break.</p>";
+				var msg_body = "<p>You won! You guessed "+answer+" correctly.</p><p>You deserve a break.</p>";
+				var msg_body = "<p>You lost. The correct answer is <strong>"+answer+".</strong>. No worries.</p>";
 
 				$("#help").show();
 				$("#button").hide();
@@ -80,8 +81,22 @@ var func = {
 		switch(count) {
 			case 1:
 				instagram.get(answer);
+				setTimeout(function() {
+					$("#instagram").show();
+					func.content_resize();
+					func.image_hover();
+					setTimeout(function() {
+						$("#instagram img").each(function(i) {
+						    var self = $(this);
+						    setTimeout(function() {
+						        self.fadeIn(100);
+						    }, 100 * i);
+						})
+					}, 400);
+				}, 500);
 				break;
 			case 2:
+				$("#tumblr").addClass("bg-gradient");
 				tumblr.get(answer);
 				setTimeout(function() {
 					$("#instagram").show().animate({top:"40%"});
@@ -100,12 +115,13 @@ var func = {
 			case 3:
 			 	twitter.search(answer);
 				setTimeout(function() {
+					$("#twitter").addClass("bg-gradient").show();
 					$("#tumblr").show().animate({top:"20%"});
 					$("#instagram").show().animate({top:"60%"});
 					func.content_resize();
 					func.image_hover();
 					setTimeout(function() {
-						$("#twitter p").each(function(i) {
+						$("#twitter li").each(function(i) {
 						    var self = $(this);
 						    setTimeout(function() {
 						        self.fadeIn(100);
