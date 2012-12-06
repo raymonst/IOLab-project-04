@@ -37,7 +37,7 @@ var func = {
 
 			if (temp_input == temp_answer) {
 				//load ending screen function
-				
+
 
 				var msg_header = "Congratulations!";
 				var msg_body = "<p>You won! You guessed "+answer+" correctly.</p><p>You deserve a break.</p>";
