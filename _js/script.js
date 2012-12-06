@@ -254,7 +254,60 @@ var func = {
 	
 	 $("#myModal").modal();
 */
-	 }
+	 },
+
+	//----------------------------------------------------------------------------------------------------------
+	pick_answer : function() {
+      var random_num = (Math.floor((Math.random()*100)+1)) % 20;
+      answer = trending_topics[random_num];
+      console.log(random_num, answer);
+      var tag = answer;
+      
+      // instagram check
+      var api_key = "access_token=215516.f2e0088.4d29740528bf40b08b1e976bc41ac66d";
+      var main_url = "https://api.instagram.com/v1/tags/";
+      var recent_tag = "/media/recent";
+      $.getJSON(main_url + tag.replace(/\s+/g, '').replace(/'/g, '') + recent_tag + '?' + api_key + '&callback=?', function(json) {
+         if ($(json.data).length >= 5) {
+            console.log("instagram checked.")
+            // tumblr check
+            var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
+            var url = "http://api.tumblr.com/v2/tagged?limit=20&tag="
+            $.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
+               if ($(json.response).length >= 5) {
+                  console.log("tumblr checked.")
+                  console.log("all pass.")
+                  func.form(hint_counter,answer);
+                  func.buttons();
+           
+                  //GETTING VIDEO FROM YOUTUBE ON THE TAG
+                  $.ajax({ 
+                     url: 'http://people.ischool.berkeley.edu/~suhani/IOLab/YoutubeVideo.php',
+                     data:{tag:answer},
+                     type: 'GET',  //Need to keep it POST data so that we can send out a longer string
+                     success: function(WholeURL) { //From php, the whole file should be returned as CSV string
+                        videoText = "<iframe src="+WholeURL+" width='520' height='300'></iframe>";
+                        //console.log(WholeURL);
+                     }
+                  });
+               }
+               else {
+                  console.log("tumblr not pass.")
+                  func.pick_answer();
+               }
+            }).error(function() {
+               console.log("tumblr not pass.")
+               func.pick_answer();
+            })
+         } else {
+            console.log("instagram not pass.")
+            func.pick_answer();
+         }
+      }).error(function () {
+         console.log("instagram not pass.")
+         func.pick_answer();
+      });
+   }
 
 }
 
@@ -277,22 +330,7 @@ var hottrend = {
 			    trending_topics.push(this.innerHTML);
 			});
 			console.log(trending_topics);
-			var random_num = (Math.floor((Math.random()*100)+1)) % 20;
-			answer = trending_topics[random_num];
-			console.log(random_num, answer);
-			func.form(hint_counter,answer);
-			func.buttons();
-  
-			//GETTING VIDEO FROM YOUTUBE ON THE TAG
-			$.ajax({ 
-				url: 'http://people.ischool.berkeley.edu/~suhani/IOLab/YoutubeVideo.php',
-				data:{tag:answer},
-				type: 'GET',  //Need to keep it POST data so that we can send out a longer string
-				success: function(WholeURL) { //From php, the whole file should be returned as CSV string
-					videoText = "<iframe src="+WholeURL+" width='520' height='300'></iframe>";
-					//console.log(WholeURL);
-				}
-			});
+			func.pick_answer();
 		});		
 
     }
@@ -417,7 +455,7 @@ var tumblr = {
 
 	    // default variables
 		var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
-		var url = "http://api.tumblr.com/v2/tagged?limit=5&tag="
+		var url = "http://api.tumblr.com/v2/tagged?limit=20&tag="
 
 		// width of extracted image
 		var image_width = 100
@@ -426,14 +464,20 @@ var tumblr = {
 		$('#tumblr').html('');
 		console.log(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?');
 		$.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
+		   var photo_count = 0;
 			$(json).each(function(index) {
 				var response = this.response
 				// only extract photo-contained post
 				for (var i in response) {
 					for (var j in response[i].photos) {
 						$('<li></li>').html('<img src='+response[i].photos[j].original_size.url+' class="label label-info"' + '/>')
-						.appendTo('#tumblr');								
+						.appendTo('#tumblr');
+						photo_count++;
+						if (photo_count >= 5)
+						   break;
 					}
+					if (photo_count >= 5)
+						break;
 				}
 			});
 		});   
