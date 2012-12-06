@@ -28,8 +28,17 @@ var func = {
 			console.log(duplicate_flag);
 			$('#msg').html("You repeated your answer. Please try something different.");
 		} else {
-			if (input == answer) {
+			//removing punctuations, spaces and changing to lower case
+
+				var temp_input = ((input.replace(/[-.,()&$#!\[\]\/{}"']+/g, "")).replace(/\s+/g, "")).toLowerCase();
+
+				var temp_answer = ((answer.replace(/[-.,()&$#!\[\]\/{}"']+/g, "")).replace(/\s+/g, "")).toLowerCase();
+
+
+			if (temp_input == temp_answer) {
 				//load ending screen function
+				
+
 				var msg_header = "Congratulations!";
 				var msg_body = "<p>You won!</p><p>You deserve a break.</p>";
 
