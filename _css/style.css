@@ -39,6 +39,8 @@ input[type=submit]:hover							{background:#f2d303;}
 
 textarea											{}
 
+iframe												{border:0;}
+
 ::selection 										{background:#f2d303;}
 ::-moz-selection 									{background:#f2d303;}
 
@@ -116,8 +118,13 @@ textarea											{}
 
 #overlay											{background:url(../_images/overlay.png) repeat; display:none; height:100%; left:0; overflow:hidden; position:fixed; top:0; width:100%;z-index:2;}
 #overlay-content									{background:#fff; color:#333; height:580px; margin:50px auto; padding:10px; position:relative; width:580px;}
+#overlay-content a:link,
+#overlay-content a:visited							{background:#dfb817; border:0; color:#000; cursor:pointer; display:inline-block; font-size:1em; font-family:'Copse', georgia, serif; height:30px !important; padding:7px 10px 0 10px; text-transform:uppercase;}
+#overlay-content a:hover,
+#overlay-content a:visited:hover					{background:#f2d303;}
+
 #overlay-close										{position:absolute; right:10px; top:10px;}
-#overlay-video										{margin:20px 0 0 0;}
+#overlay-video										{margin:20px 0;}
 
 
 
