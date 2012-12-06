@@ -110,8 +110,8 @@ iframe												{border:0;}
 #tumblr li											{display:block; float:left; height:100%; overflow:hidden; width:20%;}
 #twitter li											{background:url(../_images/quote.png) 10px 5px no-repeat; display:block; float:left; height:98%; overflow:hidden; padding:1%; width:18%;}
 
-#instagram li img,
-#tumblr li img										{display:block;}
+#tumblr li img										{display:none;}
+#twitter li p										{display:none;}
 
 
 

@@ -78,7 +78,15 @@ var func = {
 					$("#instagram").show().animate({top:"40%"});
 					func.content_resize();
 					func.image_hover();
-				}, 750);
+					setTimeout(function() {
+						$("#tumblr img").each(function(i) {
+						    var self = $(this);
+						    setTimeout(function() {
+						        self.fadeIn(100);
+						    }, 100 * i);
+						})
+					}, 400);
+				}, 500);
 				break;
 			case 3:
 			 	twitter.search(answer);
@@ -87,7 +95,15 @@ var func = {
 					$("#instagram").show().animate({top:"60%"});
 					func.content_resize();
 					func.image_hover();
-				}, 750);
+					setTimeout(function() {
+						$("#twitter p").each(function(i) {
+						    var self = $(this);
+						    setTimeout(function() {
+						        self.fadeIn(100);
+						    }, 100 * i);
+						})
+					}, 400);
+				}, 500);
 				break;
 			case 4:
 				trend_count++;
@@ -341,7 +357,7 @@ var twitter = {
 	       $.each(json.results, function(){
 	         var term_nospace = term.replace(/\s+/g, '');
 	         var re = new RegExp(term_nospace, "g");
-	         var new_text = this.text.replace(re, "<span>" + term_nospace + "</span>")
+	         var new_text = "<p>" + this.text.replace(re, "<span>" + term_nospace + "</span>") + "</p>"
 	         tweets.push(new_text);
 	         $('<li></li>').html(new_text).appendTo('#twitter');
 	       });
@@ -428,7 +444,7 @@ var tumblr = {
 
 		// cleaning #tumblr
 		$('#tumblr').html('');
-		console.log(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?');
+		//console.log(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?');
 		$.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
 			$(json).each(function(index) {
 				var response = this.response
