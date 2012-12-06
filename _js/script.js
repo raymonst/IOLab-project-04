@@ -4,6 +4,7 @@ var answer = "";
 var life = 5;
 var duplicate_flag = false;
 var trending_topics = new Array();
+var videoText="";
 
 //--------------------------------------------------------------------------------------------------------------
 var func = {
@@ -11,6 +12,7 @@ var func = {
     //----------------------------------------------------------------------------------------------------------
     init : function() {
 	    hottrend.get();
+	   
     },
  
 	//----------------------------------------------------------------------------------------------------------
@@ -29,7 +31,8 @@ var func = {
 			if (input == answer) {
 				//load ending screen function
 				msg_header = "Congratulations!";
-				msg_body = "You got the correct answer!";
+				msg_body = "<p>You won! </p><p></p>You deserve a break.";
+
 				$("#help").show();
 				$("#button").hide();
 				$("#answer").click();
@@ -56,8 +59,8 @@ var func = {
 				}
 				else if(life == 1){
   				    $("#answer").click();
-					var msg_header = "Game Over. Wanna try again?";
-					var msg_body = "<p>The correct answer is: <span>&ldquo;" + answer + "&rdquo;</span></p>";
+					var msg_header = "Life is Hard!";
+					var msg_body = "You Lose. <p></p>The correct answer is <strong>"+answer+" .</strong> <p></p><p></p>No worries.";
 					func.overlay(msg_header, msg_body);
 				}
 			}
@@ -116,7 +119,7 @@ var func = {
 			//func.buttons();
 			return false;
 		});
-		
+
 		//--------------------------------------------------------------------------------------------------------------
 		// click "show more hints"
 		$("#hints").on("click", function() {
@@ -125,20 +128,21 @@ var func = {
 			func.form(hint_counter, answer);
 			return false;
 		});
-		
+
 		//--------------------------------------------------------------------------------------------------------------
 		$("#header .overlay-open").unbind("click").on("click", function() {
 			$("#overlay").fadeIn();
 			if ($(this).attr("id") == "answer") {
-				var msg_header = "Sorry :(";
-				var msg_body = "<p>The correct answer is: <span>&ldquo;" + answer + "&rdquo;</span></p>";
+				var msg_header = "Give up?";
+				
+				var msg_body = "<p>The correct answer is <strong>"+answer+".</strong> <p></p><p></p>Refresh yourself before you try again.";
 			}
 			func.overlay(msg_header, msg_body);
 		});
 
-		$("#overlay-close").unbind("click").on("click", function() {
-			$("#overlay").fadeOut();
-		});
+		// $("#overlay-close").unbind("click").on("click", function() {
+		// 	$("#overlay").fadeOut();
+		// });
 
 	},
 
@@ -146,7 +150,7 @@ var func = {
 	content_resize : function() {
 
 		$("#container").height($(window).height());
-		
+
 		var item_width = $("#instagram li").width();
 		var item_height = $("#instagram li").height();
 
@@ -169,7 +173,7 @@ var func = {
 		$("#tumblr li img").each(function() {
 			var self = $(this);
 			var ratio = self.width() / self.height();
-			
+
 			if (item_width < item_height) {
 				if (self.width() < self.height()) {
 					self.width(item_height);
@@ -202,7 +206,7 @@ var func = {
 			}
 */
 		});
-	
+
 	},
 
 	//----------------------------------------------------------------------------------------------------------
@@ -237,25 +241,32 @@ var func = {
 
 	//----------------------------------------------------------------------------------------------------------
 	overlay : function(msg_header, msg_body) {
+
+	// 	$("#overlay h2").html(msg_header);
+	// 	$("#overlay-message").html(msg_body);
+	// 	$("#life").attr("class","life-0");
+	// 	$('#history_input').html('');
+	// 	$('#button').html('');
+
+	// 	// YOUTUBE CODE HERE
+	// 	$("#overlay-video").html("video");
+
+	// 	// initiate default variables
+	// 	hint_counter = 1;
+	// 	life = 5;
+	// 	duplicate_flag = false;
+	// 	for (var i=0;i=history_input.length;i++){
+	// 		history_input.pop();
+	// 	}
+
+	// }
+
+	$("#myModalLabel").html(msg_header);
+	msg_body=msg_body+videoText;
+	 $(".modal-body").html(msg_body);
 	
-		$("#overlay h2").html(msg_header);
-		$("#overlay-message").html(msg_body);
-		$("#life").attr("class","life-0");
-		$('#history_input').html('');
-		$('#button').html('');
-
-		// YOUTUBE CODE HERE
-		$("#overlay-video").html("video");
-
-		// initiate default variables
-		hint_counter = 1;
-		life = 5;
-		duplicate_flag = false;
-		for (var i=0;i=history_input.length;i++){
-			history_input.pop();
-		}
-
-	}
+	 $("#myModal").modal();
+}
 
 }
 
@@ -268,7 +279,7 @@ var hottrend = {
     get : function() {
        // using Google Feed API to load Google Hot Trend Feed as JSON with JSONP style
        var feed_url = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http%3A%2F%2Fwww.google.com%2Ftrends%2Fhottrends%2Fatom%2Fhourly";
-	 
+
 	    $.getJSON(feed_url + '&callback=?', function(json) {
 	       var feed = $(json.responseData.feed.entries[0].content);
 	       $("li span a", feed).each(function(){
@@ -278,11 +289,25 @@ var hottrend = {
           console.log(trending_topics);
 	       var random_num = (Math.floor((Math.random()*100)+1)) % 20;
 	       answer = trending_topics[random_num];
+	       
 	       console.log(random_num, answer);
 
 	       func.form(hint_counter,answer);
 	       func.buttons();
+//GETTING VIDEO FROM YOUTUBE ON THE TAG
+	       $.ajax({ url: 'http://people.ischool.berkeley.edu/~suhani/IOLab/YoutubeVideo.php',
+										         data:{tag:answer},
+										         type: 'GET',  //Need to keep it POST data so that we can send out a longer string
+										         success: function(WholeURL) { //From php, the whole file should be returned as CSV string
+										          videoText=" Enjoy this popular YouTube video on <strong>"+answer+".</strong></p><iframe src="+WholeURL+" width='520' height='300'></iframe>";
+										          
+										         	//console.log(WholeURL);
+
+										         }
+
+										         });
        });
+
     }
 }
 
@@ -312,7 +337,7 @@ var twitter = {
 */
 
 		return trending_topics_sample;
-		
+
     },
 
     //----------------------------------------------------------------------------------------------------------
@@ -324,7 +349,7 @@ var twitter = {
 	       $.each(json.results, function(){
 	         tweets.push(this.text);
 	         $('<li></li>').html(this.text).appendTo('#twitter');
-	         
+
 	       });
 	       console.log(tweets);
        });
@@ -398,14 +423,14 @@ var tumblr = {
 
     //----------------------------------------------------------------------------------------------------------
     get : function(tag) {
-		
+
 	    // default variables
 		var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
 		var url = "http://api.tumblr.com/v2/tagged?limit=5&tag="
-			
+
 		// width of extracted image
 		var image_width = 100
-	
+
 		// cleaning #tumblr
 		$('#tumblr').html('');
 		console.log(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?');
@@ -435,10 +460,10 @@ $(document).ready(function() {
     func.init();
     func.content_resize();
 	func.image_hover();
+
 	//twitter.search("lunar eclipse");
 });
 
 $(window).resize(function() {
     func.content_resize();
 });
-
