@@ -87,12 +87,12 @@ var func = {
 				break;
 			case 2:
 				tumblr.get(answer);
-				$("#instagram").animate({top:"40%"});
+				$("#instagram").show().animate({top:"40%"});
 				break;
 			case 3:
 			   twitter.search(answer);
-				$("#tumblr").animate({top:"20%"});
-				$("#instagram").animate({top:"60%"});
+				$("#tumblr").show().animate({top:"20%"});
+				$("#instagram").show().animate({top:"60%"});
 				break;
 			case 4:
 				alert("show answer");
@@ -140,9 +140,9 @@ var func = {
 			func.overlay(msg_header, msg_body);
 		});
 
-		// $("#overlay-close").unbind("click").on("click", function() {
-		// 	$("#overlay").fadeOut();
-		// });
+		$("#overlay-close").unbind("click").on("click", function() {
+			$("#overlay").fadeOut();
+		});
 
 	},
 
