@@ -240,7 +240,7 @@ var func = {
 
 	//----------------------------------------------------------------------------------------------------------
 	overlay : function(msg_header, msg_body) {
-
+		msg_body=msg_body+" <p></p><p></p><p>Enjoy this popular YouTube video on <strong>"+answer+"</strong>.</p>"
 		$("#overlay h2").html(msg_header);
 		$("#end-message").html(msg_body);
 		$("#life").attr("class","life-0");
