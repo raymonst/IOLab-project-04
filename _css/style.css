@@ -129,7 +129,7 @@ iframe												{border:0;}
 /* overlay */
 
 #overlay											{background:url(../_images/overlay.png) repeat; display:none; height:100%; left:0; overflow:hidden; position:fixed; top:0; width:100%;z-index:2;}
-#overlay-content									{background:#fff; color:#333; margin:10% auto; padding:20px; position:relative; width:520px;}
+#overlay-content									{background:#fff; color:#333; margin:7% auto; padding:20px; position:relative; width:520px;}
 #overlay-content a:link,
 #overlay-content a:visited							{background:#dfb817; border:0; color:#000; cursor:pointer; display:inline-block; font-size:1em; font-family:'Copse', georgia, serif; height:30px !important; margin:0 10px 0 0; padding:7px 10px 0 10px; text-transform:uppercase;}
 #overlay-content a:hover,

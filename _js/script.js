@@ -270,7 +270,7 @@ var func = {
             	var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
             	var url = "http://api.tumblr.com/v2/tagged?limit=20&tag="
             	$.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
-	            	if ($(json.response).length >= 5) {
+	            	if ($(json.response).length >= 2) {
 		            console.log("tumblr checked.")
 		            console.log("all pass.")
 		            func.form(hint_counter,answer);
