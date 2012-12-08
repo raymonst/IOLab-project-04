@@ -15,7 +15,7 @@ The game flow is as follows:
 ## Team Members and Roles
 * [Jiun-Tang Huang]() - ?
 * [Chan Kim]() - ?
-* [Suhani Mehta]- Working with Twitter and YouTube API, creating modals/overlays
+* [Suhani Mehta](https://github.com/suhaninmehta) - Working with Twitter and YouTube API, creating modals/overlays
 * [Raymon Sutedjo-The](http://ray-mon.com/) - interaction & interface design, files & script architecture, script integration
 
 ## Technologies Used
