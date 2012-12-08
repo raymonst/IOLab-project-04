@@ -15,7 +15,7 @@ The game flow is as follows:
 ## Team Members and Roles
 * [Jiun-Tang Huang]() - ?
 * [Chan Kim]() - ?
-* [Suhani Mehta]() - ?
+* [Suhani Mehta]- Working with Twitter and YouTube API, creating modals/overlays
 * [Raymon Sutedjo-The](http://ray-mon.com/) - interaction & interface design, files & script architecture, script integration
 
 ## Technologies Used
@@ -27,6 +27,6 @@ http://ray-mon.com/vizwords/
 
 ## Known Bugs
 * Not tested on older browsers.
-* ?
-* ?
+* Validation of user's input to actual answer may not be accurate. If user enters "rain" and the correct answer is "rains", it will show user "wrong answer"
+* There are known number of topics (20) that can be pulled from Google HotTrends at one time. Hence, after 20 tries, the trend topics will repeat.
 
