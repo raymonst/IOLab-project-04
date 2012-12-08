@@ -12,7 +12,6 @@ var func = {
     //----------------------------------------------------------------------------------------------------------
     init : function() {
 	    hottrend.get();
-	   
     },
  
 	//----------------------------------------------------------------------------------------------------------
@@ -38,7 +37,7 @@ var func = {
 			if (temp_input == temp_answer) {
 				//load ending screen function
 				var msg_header = "Congratulations!";
-				var msg_body = "<p>You won! You guessed "+answer+" correctly. You deserve a break.</p>";
+				var msg_body = "<p>You won! You guessed <strong>"+answer+"</strong> correctly. You deserve a break.</p>";
 
 				$("#help").show();
 				$("#button").hide();
@@ -78,25 +77,23 @@ var func = {
 		switch(count) {
 			case 1:
 				instagram.get(answer);
-				$("#instagram").show();
 				func.content_resize();
 				func.image_hover();
 				setTimeout(function() {
+					$("#instagram").show();
 				    $("#instagram img").each(function(i) {
 				        var self = $(this);
 				        setTimeout(function() {
 				            self.fadeIn(100);
 				        }, 100 * i);
 				    })
-				}, 400);
+				}, 1000);
 				break;
 			case 2:
 				$("#tumblr").addClass("bg-gradient");
 				$("#instagram").show().animate({top:"40%"});
 				tumblr.get(answer);
 				setTimeout(function() {
-					func.content_resize();
-					func.image_hover();
 					setTimeout(function() {
 						$("#tumblr img").each(function(i) {
 						    var self = $(this);
@@ -105,16 +102,18 @@ var func = {
 						    }, 100 * i);
 						})
 					}, 400);
-				}, 500);
-				break;
-			case 3:
-					$("#twitter").addClass("bg-gradient").show();
-					$("#tumblr").show().animate({top:"20%"});
-					$("#instagram").show().animate({top:"60%"});
-			 	twitter.search(answer);
-				setTimeout(function() {
+/*
 					func.content_resize();
 					func.image_hover();
+*/
+				}, 750);
+				break;
+			case 3:
+				$("#twitter").addClass("bg-gradient").show();
+				$("#tumblr").show().animate({top:"20%"});
+				$("#instagram").show().animate({top:"60%"});
+			 	twitter.search(answer);
+				setTimeout(function() {
 					setTimeout(function() {
 						$("#twitter li").each(function(i) {
 						    var self = $(this);
@@ -123,7 +122,11 @@ var func = {
 						    }, 100 * i);
 						})
 					}, 400);
-				}, 500);
+/*
+					func.content_resize();
+					func.image_hover();
+*/
+				}, 750);
 				break;
 			case 4:
 				trend_count++;
@@ -168,6 +171,8 @@ var func = {
 
 		$("#overlay .overlay-close").unbind("click").on("click", function() {
 			$("#overlay").fadeOut();
+			$("#header form").hide();
+			$("#reload").show().css({"display":"inline-block"});
 		});
 
 	},
@@ -218,19 +223,6 @@ var func = {
 				}
 			}
 
-/*
-			if (self.height() > self.width()) {
-				var margin_left = (item_width - self.width()) / 2 + "px";
-			    self.height(item_height);
-			    self.width(item_height * ratio);
-			    self.css({"margin-left" : margin_left, "margin-top" : 0});
-			} else if (self.height() < self.width() || self.height() == self.width()) {
-				var margin_top = (item_height - self.height()) / 2 + "px";
-			    self.width(item_width);
-			    self.height(item_width * 1/ratio);
-			    self.css({"margin-top" : margin_top});
-			}
-*/
 		});
 
 	},
@@ -246,105 +238,69 @@ var func = {
 		});
 	},
 
-/*
-	//----------------------------------------------------------------------------------------------------------
-	ending_screen : function(msg) {
-		$('#msg').html(msg);
-		$('#msg').append("<a href='javascript:document.location.reload();'>Play again!</a>");
-		$("#life").attr("class","life-0");
-		$('#history_input').html('');
-		$('#button').html('');
-
-		// initiate default variables
-		hint_counter = 1;
-		life =5;
-		duplicate_flag=false;
-		for (var i=0;i=history_input.length;i++){
-			history_input.pop();
-		}
-	},
-*/
-
 	//----------------------------------------------------------------------------------------------------------
 	overlay : function(msg_header, msg_body) {
 
-	$("#overlay h2").html(msg_header);
-	$("#end-message").html(msg_body);
-	$("#life").attr("class","life-0");
-	$('#history_input').html('');
-	$('#button').html('');
+		$("#overlay h2").html(msg_header);
+		$("#end-message").html(msg_body);
+		$("#life").attr("class","life-0");
+		$('#history_input').html('');
+		$('#button').html('');
+		
+		// YOUTUBE CODE HERE
+		$("#overlay-video").html(videoText);
 
-	// YOUTUBE CODE HERE
-	$("#overlay-video").html(videoText);
-
-	// 	// initiate default variables
-	// 	hint_counter = 1;
-	// 	life = 5;
-	// 	duplicate_flag = false;
-	// 	for (var i=0;i=history_input.length;i++){
-	// 		history_input.pop();
-	// 	}
-
-	// }
-
-/*
-	$("#myModalLabel").html(msg_header);
-	msg_body=msg_body+videoText;
-	 $(".modal-body").html(msg_body);
-	
-	 $("#myModal").modal();
-*/
-	 },
+	},
 
 	//----------------------------------------------------------------------------------------------------------
 	pick_answer : function() {
-      var random_num = (Math.floor((Math.random()*100)+1)) % 20;
-      answer = trending_topics[random_num];
-      console.log(random_num, answer);
-      var tag = answer;
-      
-      // instagram check
-      var api_key = "access_token=215516.f2e0088.4d29740528bf40b08b1e976bc41ac66d";
-      var main_url = "https://api.instagram.com/v1/tags/";
-      var recent_tag = "/media/recent";
-      $.getJSON(main_url + tag.replace(/\s+/g, '').replace(/'/g, '') + recent_tag + '?' + api_key + '&callback=?', function(json) {
-         if ($(json.data).length >= 2) {
-            console.log("instagram checked.")
-            // tumblr check
-            var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
-            var url = "http://api.tumblr.com/v2/tagged?limit=20&tag="
-            $.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
-               if ($(json.response).length >= 5) {
-                  console.log("tumblr checked.")
-                  console.log("all pass.")
-                  func.form(hint_counter,answer);
-                  func.buttons();
+		var random_num = (Math.floor((Math.random()*100)+1)) % 20;
+		answer = trending_topics[random_num];
+		console.log(random_num, answer);
+		var tag = answer;
+		
+		// instagram check
+		var api_key = "access_token=215516.f2e0088.4d29740528bf40b08b1e976bc41ac66d";
+		var main_url = "https://api.instagram.com/v1/tags/";
+		var recent_tag = "/media/recent";
+		$.getJSON(main_url + tag.replace(/\s+/g, '').replace(/'/g, '') + recent_tag + '?' + api_key + '&callback=?', function(json) {
+        	if ($(json.data).length >= 2) {
+            	console.log("instagram checked.")
+            	// tumblr check
+            	var api_key ="api_key=UwFy7hJFKL01D3e5ny0XhUcGYHoWyeJzaq7E6i8WpQtgSRuLE9"
+            	var url = "http://api.tumblr.com/v2/tagged?limit=20&tag="
+            	$.getJSON(url+ tag.replace(/\s+/g, '')+ '&' + api_key+'&callback=?', function(json) {
+	            	if ($(json.response).length >= 5) {
+		            console.log("tumblr checked.")
+		            console.log("all pass.")
+		            func.form(hint_counter,answer);
+		            func.buttons();
            
-                  //GETTING VIDEO FROM YOUTUBE ON THE TAG
-                  $.ajax({ 
-                     url: 'http://people.ischool.berkeley.edu/~suhani/IOLab/YoutubeVideo.php',
-                     data:{tag:answer},
-                     type: 'GET',  //Need to keep it POST data so that we can send out a longer string
-                     success: function(WholeURL) { //From php, the whole file should be returned as CSV string
-                        videoText = "<iframe src="+WholeURL+" width='520' height='300'></iframe>";
-                        //console.log(WholeURL);
-                     }
-                  });
+		            //GETTING VIDEO FROM YOUTUBE ON THE TAG
+		            $.ajax({ 
+			            url: 'http://people.ischool.berkeley.edu/~suhani/IOLab/YoutubeVideo.php',
+			            data:{tag:answer},
+			            type: 'GET',  //Need to keep it POST data so that we can send out a longer string
+			            success: function(WholeURL) { //From php, the whole file should be returned as CSV string
+			               videoText = "<iframe src="+WholeURL+" width='520' height='300'></iframe>";
+			               //console.log(WholeURL);
+			            }
+		            });
                }
                else {
-                  console.log("tumblr not pass.")
+                  //console.log("tumblr not pass.")
                   func.pick_answer();
                }
             }).error(function() {
-               console.log("tumblr not pass.")
+               //console.log("tumblr not pass.")
                func.pick_answer();
             })
          } else {
-            console.log("instagram not pass.")
+            //console.log("instagram not pass.")
             func.pick_answer();
          }
       }).error(function () {
-         console.log("instagram not pass.")
+         //console.log("instagram not pass.")
          func.pick_answer();
       });
    }
@@ -369,7 +325,7 @@ var hottrend = {
 			    // console.log(this.innerHTML);
 			    trending_topics.push(this.innerHTML);
 			});
-			console.log(trending_topics);
+			//console.log(trending_topics);
 			func.pick_answer();
 		});		
 
@@ -377,34 +333,11 @@ var hottrend = {
 
 }
 
+
+
 //--------------------------------------------------------------------------------------------------------------
 
 var twitter = {
-
-    //----------------------------------------------------------------------------------------------------------
-    get : function() {
-
-	    var main_url = "https://api.twitter.com/1/trends/1.json?callback=?";
-/* 	    var main_url = "https://api.twitter.com/1.1/trends/place.json?id=1&callback=?"; */
-	    var trending_topics = new Array();
-
-	    // sample trending topics array 
-	    var trending_topics_sample = ["rain","snow","sun"];
-
-/*
-	    $.getJSON(main_url, function(json) {	
-		    $(json).each(function(index) {
-			    var trends = this.trends;
-			    $.each(trends, function() {
-				    trending_topics.push(this.name);
-			    });
-			});
-	    });
-*/
-
-		return trending_topics_sample;
-
-    },
 
     //----------------------------------------------------------------------------------------------------------
     search : function(term) {
@@ -460,27 +393,6 @@ var instagram = {
 			func.image_hover();
 		});
 
-
-/*
-		$.ajax({
-			url: main_url + tag + recent_tag + '?' + api_key + '&callback=?',
-			success: function(json) {
-		    	var count = 0;
-		    	$(json.data).each(function(index) {
-			    	//console.log(this);
-			    	if (count < 5) {
-				    	var html_str = '<a href="' + this.link + '">' + '<img src="' + this.images.standard_resolution.url + '"' + ' title="' + this.caption.text + '"' + ' class="label label-info" width="100" height="100"/>' + '</a>';
-				    	//console.log(html_str);
-				    	$('<li></li>').html(html_str).appendTo('#instagram');
-				    }
-				    count++;
-				});
-				alert('Load was performed.');
-			}
-		});
-*/
-
-
 	}
 
 }
@@ -521,6 +433,8 @@ var tumblr = {
 						break;
 				}
 			});
+			func.content_resize();
+			func.image_hover();
 		});   
 	}
 

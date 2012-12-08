@@ -54,7 +54,7 @@ iframe												{border:0;}
 
 /* header */
 
-#header												{font-family:'Copse', georgia, serif; background:#000; display:block; height:18%; overflow:hidden; padding:1% 1% 0 1%; width:98%;}
+#header												{font-family:'Copse', georgia, serif; background:url(../_images/header-bg.png) right top repeat-y #000; display:block; height:18%; overflow:hidden; padding:1% 1% 0 1%; position:relative; width:98%;}
 
 #header form										{display:block; float:left; margin:0; width:40%;}
 #header form table									{width:100%;}
@@ -95,6 +95,13 @@ iframe												{border:0;}
 #msg span											{font-size:1.75em; letter-spacing:1px;}			
 #life												{display:block; height:10px; width:100px;}
 
+#reload:link,
+#reload:visited										{background:#dfb817; border:0; color:#000; cursor:pointer; display:none; float:left; font-size:2em; padding:5px 10px 7px 10px; text-transform:uppercase;}
+#reload:hover,
+#reload:visited:hover								{background:#f2d303;}
+
+#logo												{position:absolute; display:block; right:1%; top:10%;}
+
 
 
 /* content */
@@ -122,7 +129,7 @@ iframe												{border:0;}
 /* overlay */
 
 #overlay											{background:url(../_images/overlay.png) repeat; display:none; height:100%; left:0; overflow:hidden; position:fixed; top:0; width:100%;z-index:2;}
-#overlay-content									{background:#fff; color:#333; margin:50px auto; padding:10px 10px 30px 10px; position:relative; width:580px;}
+#overlay-content									{background:#fff; color:#333; margin:10% auto; padding:20px; position:relative; width:520px;}
 #overlay-content a:link,
 #overlay-content a:visited							{background:#dfb817; border:0; color:#000; cursor:pointer; display:inline-block; font-size:1em; font-family:'Copse', georgia, serif; height:30px !important; margin:0 10px 0 0; padding:7px 10px 0 10px; text-transform:uppercase;}
 #overlay-content a:hover,
