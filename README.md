@@ -13,10 +13,10 @@ The game flow is as follows:
 * At this point, the user can close the overlay window or play the game again.
 
 ## Team Members and Roles
-* [Jiun-Tang Huang]() - ?
-* [Chan Kim]() - ?
-* [Suhani N Mehta](https://github.com/suhaninmehta) - Working with Twitter and YouTube API, creating modals/overlays
-* [Raymon Sutedjo-The](http://ray-mon.com/) - interaction & interface design, files & script architecture, script integration
+* [Jiun-Tang Huang]() - worked with Google Hot Trends and Tumblr API, developed additional game logic
+* [Chan Kim]() - worked with Instagram API, developed main game logic
+* [Suhani N Mehta](https://github.com/suhaninmehta) - worked with Twitter and YouTube API, created modals/overlays
+* [Raymon Sutedjo-The](http://ray-mon.com/) - built basic files & script architecture, integrated script, worked on interaction & interface design
 
 ## Technologies Used
 * Code - HTML, CSS, Javascript/jQuery, JSON, PHP
